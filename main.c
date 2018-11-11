@@ -18,7 +18,9 @@ printf("%s %s %s",canton, debut, fin);
 
 valideSaisie(canton,debut,fin);
 
-//printf("%s %s %s",canton, debut, fin);
+
+
+printf("\n%s %s %s",canton, debut, fin);
 
 return 0;
 }

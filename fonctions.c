@@ -4,20 +4,22 @@
 #include <string.h>
 #include <time.h>
 
-int valideSaisie(char canton[2], char debut[10],char fin [10])
+void valideSaisie(char canton[2], char debut[10],char fin [10])
 {
 	int i=0;
 	for(i=0; i<=1; i++) {
 		canton[i]=tolower(canton[i]);
 	}
-	if(strcmp(canton,"vs")!=0)
+	if(strcmp(canton,"vs")!=0 || sizeof(canton)==2)
 		{
 		printf("\nERREUR : Argument [canton] non valide");
-		}
-		
-		
-		
+		}	
 }
+
+
+
+
+
 
 void aide(void)
 {
