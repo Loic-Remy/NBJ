@@ -19,17 +19,12 @@ void validerSaisie(char canton[2], char debut[10],char fin [10])
 
 int comparerDates(char premierJour[10], char dernierJour [10])
 {
-	double nbjours=0;
+	double timeDifference=0;
 	char tamponSaisie[4]={0};
 	struct tm debut;
-	struct tm fin;
-	struct tm *ptrdebut=&debut;
-	struct tm *ptrfin=&fin;
-	
-	
-	time_t start;
-	time_t end;
-	
+	struct tm fin;	
+	time_t timeStart=0;
+	time_t timeEnd=0;
 	
 	int i=0;
 	
@@ -52,20 +47,21 @@ int comparerDates(char premierJour[10], char dernierJour [10])
 			tamponSaisie[i-6]=premierJour[i];
 		}
 		else if (i==10) {
-			debut.tm_year=atoi(tamponSaisie);
+			debut.tm_year=atoi(tamponSaisie)-1900;
 			memset(tamponSaisie,0,4);
+			debut.tm_hour=0;
+			debut.tm_min=0;
+			debut.tm_sec=0;
+			debut.tm_isdst=0;
 		}
 		else
 		{
 			printf("ERREUR: Format de date de debut incorrect");
 		}	
 	}
-	debut.tm_hour=0;
-	debut.tm_min=0;
-	debut.tm_sec=0;
+
+	timeStart=mktime(&debut);  	/* TODO (#1#): à l'exécution de cette ligne, debut.tm_mday subit -1 */
 	
-	start=mktime(ptrdebut);
-		
 	i=0;
 	
 	for (i=0; i<=10; i++) {
@@ -87,8 +83,12 @@ int comparerDates(char premierJour[10], char dernierJour [10])
 			tamponSaisie[i-6]=dernierJour[i];
 		}
 		else if (i==10) {
-			fin.tm_year=atoi(tamponSaisie);
+			fin.tm_year=atoi(tamponSaisie)-1900;
 			memset(tamponSaisie,0,9);
+			fin.tm_hour=0;
+			fin.tm_min=0;
+			fin.tm_sec=0;
+			fin.tm_isdst=0;
 		}
 		else
 		{
@@ -96,17 +96,18 @@ int comparerDates(char premierJour[10], char dernierJour [10])
 		}	
 	}
 
-fin.tm_hour=0;
-fin.tm_min=0;
-fin.tm_sec=0;
+	
+	timeEnd=mktime(&fin);
+	
+		
 
-end=mktime(ptrfin);
-	
-nbjours=difftime(end,start);
-	
 printf("\njour, mois, annee: %d %d %d",debut.tm_mday, debut.tm_mon, debut.tm_year);
 printf("\njour, mois, annee: %d %d %d",fin.tm_mday, fin.tm_mon, fin.tm_year);	
-printf("\nnbjours %f",nbjours);
+
+timeDifference=difftime(timeEnd,timeStart);
+
+printf("\nnbjours %f",timeDifference/(60*60*24));
+
 
 	
 }
