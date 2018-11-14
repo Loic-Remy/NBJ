@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "fonctions.h"
 
 void validerSaisie(char canton[2], char debut[10],char fin [10])
 {
@@ -98,19 +99,36 @@ int comparerDates(char premierJour[10], char dernierJour [10])
 
 	
 	timeEnd=mktime(&fin);
-	
-		
+			
 
-printf("\njour, mois, annee: %d %d %d",debut.tm_mday, debut.tm_mon, debut.tm_year);
-printf("\njour, mois, annee: %d %d %d",fin.tm_mday, fin.tm_mon, fin.tm_year);	
+//printf("\njour, mois, annee: %d %d %d",debut.tm_mday, debut.tm_mon, debut.tm_year);
+//printf("\njour, mois, annee: %d %d %d",fin.tm_mday, fin.tm_mon, fin.tm_year);	
 
 timeDifference=difftime(timeEnd,timeStart);
 
 printf("\nnbjours %f",timeDifference/(60*60*24));
 
-
+return timeDifference/(60*60*24);
 	
 }
+
+
+int chargerListeFeries(datevent tableau[])
+{
+	char c=0;
+	int i=0;
+	FILE *fichier=fopen("VS","r");
+	
+	while(c!=EOF)
+	{
+		c=fgetc(fichier);
+	}
+
+	
+	
+	fclose(fichier);
+}
+
 
 
 

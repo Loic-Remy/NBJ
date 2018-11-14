@@ -1,9 +1,10 @@
-01.01.2018;Nouvel an
-19.03.2018;St-Joseph
-10.05.2018;Ascension
-31.05.2018;Fête Dieu
-01.08.2018;1er Août
-15.08.2018;Assomption
-01.11.2018:Toussaint
-08.08.2018:Immaculée conception
-25.12.2018:Noël
+DATE,EVENEMENT
+01.01.2018,"Nouvel an"
+19.03.2018,"St-Joseph"
+10.05.2018,"Ascension"
+31.05.2018,"Fête Dieu"
+01.08.2018,"1er Août"
+15.08.2018,"Assomption"
+01.11.2018,"Toussaint"
+08.08.2018,"Immaculée conception"
+25.12.2018,"Noël"
