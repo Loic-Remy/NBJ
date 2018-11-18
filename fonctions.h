@@ -3,7 +3,7 @@
 
 struct datevent {
 	time_t date;
-	char event;
+	char event[30];
 };
 
 void validerSaisie(char canton[2], char debut[10],char fin [10]);

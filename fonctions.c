@@ -113,27 +113,67 @@ return timeDifference/(60*60*24);
 }
 
 
-int chargerListeFeries(struct datevent tableau[])
+int chargerListeFeries(struct datevent tabFeries[])
 {
 	
-	char tampon[20]={0};
+	struct tm date={0};
+	char tampon[30]={0};
+	int compteurLigne=1;
 	char c=0;
-	int i=0;
-	FILE *fichier=fopen("VS","r");
+	int iCar=0;
+	int iTamp=0;
+	FILE *fichier=NULL;
+	
+	fichier=fopen("VS.txt","r");
+	
+	if(fichier=!NULL) {
+			
 	
 	while(c!=EOF)
 	{
-		c=fgetc(fichier);
+		fgetc(fichier);
 		
-		if (c='"')
-		i--;
-		
+	
+		if (iCar==2){
+			date.tm_mday=atoi(tampon);
+			memset(tampon,0,30);
+			iTamp=0;
+			iCar++;
+		}	
+		else if (iCar==4){
+			date.tm_mon=atoi(tampon);
+			memset(tampon,0,30);
+			iTamp=0;
+			iCar++;
+		}	
+		else if (iCar==10){
+			date.tm_year=atoi(tampon);
+			memset(tampon,0,30);
+			iTamp=0;
+			iCar++;				
+		}
+		else if (c=='\n') {
+			strcpy(tabFeries[compteurLigne].event,tampon);
+			compteurLigne++;
+			iTamp=0;
+			iCar++;
+		}	
+		else {
+			tampon[iTamp]=c;
+			iCar++;	
+		}
+			
 		
 	}
 
 	
 	
 	fclose(fichier);
+	}
+	else {
+		printf("Le fichier VS n'a pas pu etre ouvert");
+	}
+	
 }
 
 
