@@ -61,7 +61,7 @@ int comparerDates(char premierJour[10], char dernierJour [10])
 		}	
 	}
 
-	timeStart=mktime(&debut);  	/* TODO (#1#): à l'exécution de cette ligne, debut.tm_mday subit -1 */
+	timeStart=mktime(&debut);  	/* DONE (#1#): à l'exécution de cette ligne, debut.tm_mday subit -1 */
 	
 	i=0;
 	
@@ -113,8 +113,10 @@ return timeDifference/(60*60*24);
 }
 
 
-int chargerListeFeries(datevent tableau[])
+int chargerListeFeries(struct datevent tableau[])
 {
+	
+	char tampon[20]={0};
 	char c=0;
 	int i=0;
 	FILE *fichier=fopen("VS","r");
@@ -122,6 +124,11 @@ int chargerListeFeries(datevent tableau[])
 	while(c!=EOF)
 	{
 		c=fgetc(fichier);
+		
+		if (c='"')
+		i--;
+		
+		
 	}
 
 	
