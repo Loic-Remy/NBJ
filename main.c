@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]) 
 {
 
-char canton[2]="VS";
+char canton[3]="VS";
 char debut[11]="23.11.1988";
 char fin[11]="24.11.1988";
 
@@ -24,7 +24,7 @@ comparerDates(debut,fin);
 
 //printf("\nValeur: canton, debut, fin: %s %s %s",canton, debut, fin);
 
-chargerListeFeries(tabFeries);
+chargerListeFeries(tabFeries,canton);
 
 return 0;
 }

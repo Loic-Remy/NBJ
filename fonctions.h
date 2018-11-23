@@ -6,10 +6,10 @@ struct datevent {
 	char event[30];
 };
 
-void validerSaisie(char canton[2], char debut[10],char fin [10]);
+void validerSaisie(char canton[3], char debut[11],char fin [11]);
 
-int comparerDates(char premierJour[10], char dernierJour [10]);
+int comparerDates(char premierJour[11], char dernierJour [11]);
 
-int chargerListeFeries(struct datevent tableau[]);
+int chargerListeFeries(struct datevent tableau[], char canton[2]);
 
 void aide(void);

@@ -5,7 +5,7 @@
 #include <time.h>
 #include "fonctions.h"
 
-void validerSaisie(char canton[2], char debut[10],char fin [10])
+void validerSaisie(char canton[3], char debut[11],char fin [11])
 {
 	int i=0;
 	
@@ -18,7 +18,7 @@ void validerSaisie(char canton[2], char debut[10],char fin [10])
 		}	
 }
 
-int comparerDates(char premierJour[10], char dernierJour [10])
+int comparerDates(char premierJour[11], char dernierJour [11])
 {
 	double timeDifference=0;
 	char tamponSaisie[4]={0};
@@ -113,67 +113,47 @@ return timeDifference/(60*60*24);
 }
 
 
-int chargerListeFeries(struct datevent tabFeries[])
+int chargerListeFeries(struct datevent tabFeries[], char canton[3])
 {
 	
 	struct tm date={0};
-	char tampon[30]={0};
+	char tampon[40]={0};
 	int compteurLigne=1;
 	char c=0;
-	int iCar=0;
-	int iTamp=0;
+	int i=0;
 	FILE *fichier=NULL;
 	
 	fichier=fopen("VS.txt","r");
 	
-	if(fichier=!NULL) {
-			
-	
-	while(c!=EOF)
-	{
-		fgetc(fichier);
-		
-	
-		if (iCar==2){
-			date.tm_mday=atoi(tampon);
-			memset(tampon,0,30);
-			iTamp=0;
-			iCar++;
-		}	
-		else if (iCar==4){
-			date.tm_mon=atoi(tampon);
-			memset(tampon,0,30);
-			iTamp=0;
-			iCar++;
-		}	
-		else if (iCar==10){
-			date.tm_year=atoi(tampon);
-			memset(tampon,0,30);
-			iTamp=0;
-			iCar++;				
-		}
-		else if (c=='\n') {
-			strcpy(tabFeries[compteurLigne].event,tampon);
-			compteurLigne++;
-			iTamp=0;
-			iCar++;
-		}	
-		else {
-			tampon[iTamp]=c;
-			iCar++;	
-		}
-			
-		
-	}
 
-	
-	
-	fclose(fichier);
-	}
-	else {
+	if(fichier==NULL) {
 		printf("Le fichier VS n'a pas pu etre ouvert");
 	}
+	else {
+//Lire le fichier pour compter le nombre de ligne et creer un tableau en fonction
+		while (c!=EOF) {
+			c=fgetc(fichier);
+			if (c=='\n') {
+				compteurLigne++;
+			}
+		}
+		tabFeries=calloc(compteurLigne,sizeof(struct datevent));
+		c=0;
+		compteurLigne=1;
+		rewind(fichier);
+							
+		while(fgets(tampon,40,fichier)!=NULL) {
+			
+			date.tm_mday=atoi(strcat()tampon[0];
+			
+			memset(tampon,0,40);
+		}
+			
+
+		
+	}	
 	
+fclose(fichier);
 }
 
 
