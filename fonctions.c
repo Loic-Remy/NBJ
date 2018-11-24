@@ -117,10 +117,13 @@ int chargerListeFeries(struct datevent tabFeries[], char canton[3])
 {
 	
 	struct tm date={0};
-	char tampon[40]={0};
+	time_t dateSec=0;
+	char tamponLigne[40]={0};
+	char tamponSaisie[30]={0};
 	int compteurLigne=1;
 	char c=0;
 	int i=0;
+	int n=0;
 	FILE *fichier=NULL;
 	
 	fichier=fopen("VS.txt","r");
@@ -138,19 +141,51 @@ int chargerListeFeries(struct datevent tabFeries[], char canton[3])
 			}
 		}
 		tabFeries=calloc(compteurLigne,sizeof(struct datevent));
-		c=0;
 		compteurLigne=1;
 		rewind(fichier);
 							
-		while(fgets(tampon,40,fichier)!=NULL) {
+		while(fgets(tamponLigne,40,fichier)!=NULL) {
 			
-			date.tm_mday=atoi(strcat()tampon[0];
-			
-			memset(tampon,0,40);
+		for (i=0; i<=39; i++) {
+		if (i<2) {
+			tamponSaisie[i]=tamponLigne[i];
 		}
+		else if (i==2) {
+			date.tm_mday=atoi(tamponSaisie);
+			memset(tamponSaisie,0,30);
+		}
+		else if (i>2 &&i<5) {
+			tamponSaisie[i-3]=tamponLigne[i];
+		}
+		else if (i==5) {
+			date.tm_mon=atoi(tamponSaisie);
+			memset(tamponSaisie,0,30);
+		}
+		else if (i>5 && i<10) {
+			tamponSaisie[i-6]=tamponLigne[i];
+		}
+		else if (i==10) {
+			date.tm_year=atoi(tamponSaisie)-1900;
+			memset(tamponSaisie,0,30);
+			date.tm_hour=0;
+			date.tm_min=0;
+			date.tm_sec=0;
+			date.tm_isdst=0;
+			dateSec=mktime(&date);
+			tabFeries[n].date=dateSec;
+		}
+		else if (i>10 && i<39) {
+			tamponSaisie[i-11]=tamponLigne[i];
+		}
+		else if (i==39){
+			strncpy(tabFeries[n].event,tamponSaisie,strlen(tamponSaisie));
+			memset(tamponSaisie,0,30);
+			n++;
 			
-
 		
+		}
+		}
+		}
 	}	
 	
 fclose(fichier);
