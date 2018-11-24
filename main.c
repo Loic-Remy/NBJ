@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
 {
 
 char canton[3]="VS";
-char debut[11]="23.11.1988";
-char fin[11]="24.11.1988";
+char debut[11]="23.11.2018";
+char fin[11]="01.12.2018";
 
 struct datevent * tabFeries=NULL;
 
@@ -20,11 +20,9 @@ printf("Valeur du scanf: %s %s %s",canton, debut, fin);
 
 validerSaisie(canton,debut,fin);
 
-comparerDates(debut,fin);
-
-//printf("\nValeur: canton, debut, fin: %s %s %s",canton, debut, fin);
-
 chargerListeFeries(tabFeries,canton);
+
+comparerDates(debut,fin,tabFeries);
 
 return 0;
 }

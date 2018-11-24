@@ -8,7 +8,7 @@ struct datevent {
 
 void validerSaisie(char canton[3], char debut[11],char fin [11]);
 
-int comparerDates(char premierJour[11], char dernierJour [11]);
+int comparerDates(char premierJour[11], char dernierJour[11], struct datevent * tabFeries);
 
 int chargerListeFeries(struct datevent tableau[], char canton[2]);
 

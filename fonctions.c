@@ -18,15 +18,22 @@ void validerSaisie(char canton[3], char debut[11],char fin [11])
 		}	
 }
 
-int comparerDates(char premierJour[11], char dernierJour [11])
+int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries)
 {
 	double timeDifference=0;
 	char tamponSaisie[4]={0};
-	struct tm debut;
-	struct tm fin;	
+	struct tm debut={0};
+	struct tm fin={0};
+	struct tm check={0};
+		
 	time_t timeStart=0;
 	time_t timeEnd=0;
+	time_t timeCheck=0;
 	
+	int nbOuvres=0;
+	int nbSam=0;
+	int nbDim=0;
+	int nbFeries=0;
 	int i=0;
 	
 	for (i=0; i<=10; i++) {
@@ -41,7 +48,7 @@ int comparerDates(char premierJour[11], char dernierJour [11])
 			tamponSaisie[i-3]=premierJour[i];
 		}
 		else if (i==5) {
-			debut.tm_mon=atoi(tamponSaisie);
+			debut.tm_mon=atoi(tamponSaisie)-1;
 			memset(tamponSaisie,0,4);
 		}
 		else if (i<10 && i>5) {
@@ -77,7 +84,7 @@ int comparerDates(char premierJour[11], char dernierJour [11])
 			tamponSaisie[i-3]=dernierJour[i];
 		}
 		else if (i==5) {
-			fin.tm_mon=atoi(tamponSaisie);
+			fin.tm_mon=atoi(tamponSaisie)-1;
 			memset(tamponSaisie,0,4);
 		}
 		else if (i<10 && i>5) {
@@ -96,19 +103,26 @@ int comparerDates(char premierJour[11], char dernierJour [11])
 			printf("ERREUR: Format de date de fin incorrect");
 		}	
 	}
-
-	
 	timeEnd=mktime(&fin);
-			
 
-//printf("\njour, mois, annee: %d %d %d",debut.tm_mday, debut.tm_mon, debut.tm_year);
-//printf("\njour, mois, annee: %d %d %d",fin.tm_mday, fin.tm_mon, fin.tm_year);	
+timeCheck=timeStart;			
+while (timeCheck<=timeEnd) {
+	
+	check=*localtime(&timeCheck);
+	
+	if (check.tm_wday==6) {
+		nbSam++;
+	}		
+	else if (check.tm_wday==0){
+		nbDim++;
+	}	
+	else {
+		nbOuvres++;
+	}
 
-timeDifference=difftime(timeEnd,timeStart);
 
-printf("\nnbjours %f",timeDifference/(60*60*24));
-
-return timeDifference/(60*60*24);
+	timeCheck=timeCheck+(60*60*24);
+}
 	
 }
 
