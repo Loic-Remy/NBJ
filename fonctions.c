@@ -18,7 +18,7 @@ void validerSaisie(char canton[3], char debut[11],char fin [11])
 		}	
 }
 
-int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries)
+int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries, int tailleTabFeries)
 {
 	double timeDifference=0;
 	char tamponSaisie[4]={0};
@@ -110,6 +110,9 @@ while (timeCheck<=timeEnd) {
 	
 	check=*localtime(&timeCheck);
 	
+	
+	
+	
 	if (check.tm_wday==6) {
 		nbSam++;
 	}		
@@ -117,17 +120,24 @@ while (timeCheck<=timeEnd) {
 		nbDim++;
 	}	
 	else {
-		nbOuvres++;
+	/*	for (i=0;i<=tailleTabFeries;i++) {
+			
+			if (timeCheck==tabFeries[i].date)
+				nbFeries++;
+		}*/
+
 	}
 
 
 	timeCheck=timeCheck+(60*60*24);
 }
+
+printf("\n\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]",nbSam,nbDim,nbFeries,nbOuvres);
 	
 }
 
 
-int chargerListeFeries(struct datevent tabFeries[], char canton[3])
+int chargerListeFeries(struct datevent *tabFeries, char canton[3], int *ptrTailleTab)
 {
 	
 	struct tm date={0};
@@ -147,7 +157,7 @@ int chargerListeFeries(struct datevent tabFeries[], char canton[3])
 		printf("Le fichier VS n'a pas pu etre ouvert");
 	}
 	else {
-//Lire le fichier pour compter le nombre de ligne et creer un tableau en fonction
+		//Lire le fichier pour compter le nombre de ligne et creer un tableau en fonction
 		while (c!=EOF) {
 			c=fgetc(fichier);
 			if (c=='\n') {
@@ -155,6 +165,10 @@ int chargerListeFeries(struct datevent tabFeries[], char canton[3])
 			}
 		}
 		tabFeries=calloc(compteurLigne,sizeof(struct datevent));
+		if(tabFeries==NULL) {
+			exit(0);
+		}
+		(*ptrTailleTab)=compteurLigne;
 		compteurLigne=1;
 		rewind(fichier);
 							
