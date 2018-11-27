@@ -8,8 +8,10 @@ struct datevent {
 
 void validerSaisie(char canton[3], char debut[11],char fin [11]);
 
-int comparerDates(char premierJour[11], char dernierJour[11], struct datevent * tabFeries, int tailleTabFeries);
+struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[2], int *ptrTailleTab);
 
-int chargerListeFeries(struct datevent *tabFeries, char canton[2], int *ptrTailleTab);
+int comparerDates(char premierJour[11], char dernierJour[11], struct datevent tabFeries[], int tailleTabFeries);
+
+
 
 void aide(void);

@@ -18,6 +18,9 @@ void validerSaisie(char canton[3], char debut[11],char fin [11])
 		}	
 }
 
+/*--------------------------------------------------------------------------------------------*/
+
+
 int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries, int tailleTabFeries)
 {
 	double timeDifference=0;
@@ -68,7 +71,7 @@ int comparerDates(char premierJour[11], char dernierJour [11], struct datevent *
 		}	
 	}
 
-	timeStart=mktime(&debut);  	/* DONE (#1#): à l'exécution de cette ligne, debut.tm_mday subit -1 */
+	timeStart=mktime(&debut);
 	
 	i=0;
 	
@@ -136,8 +139,10 @@ printf("\n\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]",nbSam,nbDim,nb
 	
 }
 
+/*--------------------------------------------------------------------------------------------*/
 
-int chargerListeFeries(struct datevent *tabFeries, char canton[3], int *ptrTailleTab)
+
+struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[3], int *ptrTailleTab)
 {
 	
 	struct tm date={0};
@@ -217,11 +222,12 @@ int chargerListeFeries(struct datevent *tabFeries, char canton[3], int *ptrTaill
 	}	
 	
 fclose(fichier);
+return tabFeries;
 }
 
 
 
-
+/*--------------------------------------------------------------------------------------------*/
 
 void aide(void)
 {
