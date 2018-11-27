@@ -23,7 +23,7 @@ int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 
 //scanf("%s %s %s",&canton, &debut, &fin);
-printf("Valeur du scanf: %s %s %s",canton, debut, fin);
+printf("Canton: %s\tDebut: %s\tFin: %s",canton, debut, fin);
 
 validerSaisie(canton,debut,fin);
 

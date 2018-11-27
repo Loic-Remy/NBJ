@@ -137,7 +137,7 @@ while (timeCheck<=timeEnd) {
 	
 }
 
-printf("\n\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]",nbSam,nbDim,nbFeries,nbOuvres);
+printf("\n\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);
 	
 }
 
