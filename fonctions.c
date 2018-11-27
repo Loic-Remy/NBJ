@@ -122,14 +122,19 @@ while (timeCheck<=timeEnd) {
 		nbDim++;
 	}	
 	else {
+		nbOuvres++;
+		
 		for (i=0;i<tailleTabFeries;i++) {
 			
-			if (timeCheck==tabFeries[i].date)
+			if (timeCheck==tabFeries[i].date) {
 				nbFeries++;
+				nbOuvres--;
+			}
 		}
 
 	}
 	timeCheck=timeCheck+(60*60*24);
+	
 }
 
 printf("\n\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]",nbSam,nbDim,nbFeries,nbOuvres);
