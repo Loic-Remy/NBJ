@@ -115,7 +115,6 @@ while (timeCheck<=timeEnd) {
 	
 	
 	
-	
 	if (check.tm_wday==6) {
 		nbSam++;
 	}		
@@ -123,15 +122,13 @@ while (timeCheck<=timeEnd) {
 		nbDim++;
 	}	
 	else {
-	/*	for (i=0;i<=tailleTabFeries;i++) {
+		for (i=0;i<tailleTabFeries;i++) {
 			
 			if (timeCheck==tabFeries[i].date)
 				nbFeries++;
-		}*/
+		}
 
 	}
-
-
 	timeCheck=timeCheck+(60*60*24);
 }
 
@@ -191,7 +188,7 @@ struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[3],
 			tamponSaisie[i-3]=tamponLigne[i];
 		}
 		else if (i==5) {
-			date.tm_mon=atoi(tamponSaisie);
+			date.tm_mon=atoi(tamponSaisie)-1;
 			memset(tamponSaisie,0,30);
 		}
 		else if (i>5 && i<10) {
