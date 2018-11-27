@@ -13,16 +13,22 @@ char canton[3]={0};
 char debut[11]={0};
 char fin[11]={0};
 
-strcpy(canton,argv[1]);
-strcpy(debut,argv[2]);
-strcpy(fin,argv[3]);
+if (argc==1) {
+	printf("$ ");
+	scanf("%s %s %s",&canton, &debut, &fin);
+	}
+else {
+	strcpy(canton,argv[1]);
+	strcpy(debut,argv[2]);
+	strcpy(fin,argv[3]);
+}
+
 
 struct datevent *tabFeries=NULL;
 
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 
-//scanf("%s %s %s",&canton, &debut, &fin);
 printf("Canton: %s\tDebut: %s\tFin: %s",canton, debut, fin);
 
 validerSaisie(canton,debut,fin);
@@ -31,5 +37,6 @@ tabFeries=chargerListeFeries(tabFeries,canton,ptrTailleTab);
 
 comparerDates(debut,fin,tabFeries,tailleTab);
 
+system("PAUSE");
 return 0;
 }
