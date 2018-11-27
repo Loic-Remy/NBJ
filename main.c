@@ -13,10 +13,9 @@ char canton[3]={0};
 char debut[11]={0};
 char fin[11]={0};
 
-strcpy(canton,"VS");
-strcpy(debut,"02.01.1970");
-strcpy(fin,"31.12.2017");
-
+strcpy(canton,argv[1]);
+strcpy(debut,argv[2]);
+strcpy(fin,argv[3]);
 
 struct datevent *tabFeries=NULL;
 
