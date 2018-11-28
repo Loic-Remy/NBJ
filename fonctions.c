@@ -5,17 +5,26 @@
 #include <time.h>
 #include "fonctions.h"
 
-void validerSaisie(char canton[3], char debut[11],char fin [11])
+void validerCanton(char canton[3])
 {
 	int i=0;
 	
 	for(i=0; i<=1; i++) {
 		canton[i]=tolower(canton[i]);
 	}
-	if(strcmp(canton,"vs")!=0 || sizeof(canton)==2)
+	
+	FILE *fichier=NULL;
+	char cantonValide[7]={0};
+	snprintf(cantonValide,6,"%s.txt",canton);
+	fichier=fopen(cantonValide,"r");
+	
+	if(fichier==NULL)
 		{
 		printf("\nERREUR : Argument [canton] non valide");
-		}	
+		}
+	else {
+		fclose(fichier);
+	}
 }
 
 /*--------------------------------------------------------------------------------------------*/

@@ -31,7 +31,7 @@ int *ptrTailleTab=&tailleTab;
 
 printf("Canton: %s\tDebut: %s\tFin: %s",canton, debut, fin);
 
-validerSaisie(canton,debut,fin);
+validerCanton(canton);
 
 tabFeries=chargerListeFeries(tabFeries,canton,ptrTailleTab);
 

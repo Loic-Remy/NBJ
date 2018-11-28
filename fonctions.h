@@ -6,7 +6,7 @@ struct datevent {
 	char event[30];
 };
 
-void validerSaisie(char canton[3], char debut[11],char fin [11]);
+void validerCanton(char canton[3]);
 
 struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[2], int *ptrTailleTab);
 
