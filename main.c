@@ -29,7 +29,7 @@ struct datevent *tabFeries=NULL;
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 
-printf("Canton: %s\tDebut: %s\tFin: %s",canton, debut, fin);
+//printf("Canton: %s\tDebut: %s\tFin: %s",canton, debut, fin);
 
 validerCanton(canton);
 

@@ -5,7 +5,7 @@
 #include <time.h>
 #include "fonctions.h"
 
-void validerCanton(char canton[3])
+char *validerCanton(char canton[3])
 {
 	int i=0;
 	
@@ -25,6 +25,8 @@ void validerCanton(char canton[3])
 	else {
 		fclose(fichier);
 	}
+	
+	return;
 }
 
 /*--------------------------------------------------------------------------------------------*/
@@ -166,9 +168,10 @@ struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[3],
 	int n=0;
 	FILE *fichier=NULL;
 	
-	fichier=fopen("VS.txt","r");
+	char cantonValide[7]={0};
+	snprintf(cantonValide,6,"%s.txt",canton);
+	fichier=fopen(cantonValide,"r");
 	
-
 	if(fichier==NULL) {
 		printf("Le fichier VS n'a pas pu etre ouvert");
 	}
