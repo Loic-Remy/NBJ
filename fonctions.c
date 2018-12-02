@@ -32,6 +32,21 @@ char *validerCanton(char canton[3])
 /*--------------------------------------------------------------------------------------------*/
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries, int tailleTabFeries)
 {
 	double timeDifference=0;
@@ -148,7 +163,7 @@ while (timeCheck<=timeEnd) {
 	
 }
 
-printf("\n\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);
+printf("\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);
 	
 }
 
