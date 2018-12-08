@@ -18,13 +18,10 @@ int validerEtFormaterFeries(char **listeFeries, char *canton)
 	
 	if(fichier==NULL)
 		{
-		printf("\nERREUR : Argument [canton] non valide");
-		fclose(fichier);
+		strcpy(*listeFeries,"CH.txt");
+		printf("\nERREUR : Argument [canton] non valide\nCalcul effectue avec la liste par defaut CH");
 		}
-	else {
-		fclose(fichier);
-	}
-	
+	fclose(fichier);
 	return 0;
 }
 
