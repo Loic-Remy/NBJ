@@ -13,10 +13,10 @@ int validerEtFormaterFeries(char **listeFeries, char canton[3])
 {
 	int i=0;
 	
-	for(i=0; i<=1; i++) {
+	/*for(i=0; i<=1; i++) {
 		canton[i]=tolower(canton[i]);
 	}
-	
+	*/
 	FILE *fichier=NULL;
 	*listeFeries=calloc(7,sizeof(char));
 	snprintf(*listeFeries,6,"%s.txt",canton);
