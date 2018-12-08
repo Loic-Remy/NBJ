@@ -5,7 +5,11 @@
 #include <time.h>
 #include "fonctions.h"
 
-char *validerCanton(char canton[3])
+
+/*Valider argument "Feries" saisi par l'utilisateur
+et le formater pour permettre ouverture du fichier dans autre fonction*/
+
+int validerEtFormaterFeries(char **listeFeries, char canton[3])
 {
 	int i=0;
 	
@@ -14,19 +18,20 @@ char *validerCanton(char canton[3])
 	}
 	
 	FILE *fichier=NULL;
-	char cantonValide[7]={0};
-	snprintf(cantonValide,6,"%s.txt",canton);
-	fichier=fopen(cantonValide,"r");
+	*listeFeries=calloc(7,sizeof(char));
+	snprintf(*listeFeries,6,"%s.txt",canton);
+	fichier=fopen(*listeFeries,"r");
 	
 	if(fichier==NULL)
 		{
 		printf("\nERREUR : Argument [canton] non valide");
+		fclose(fichier);
 		}
 	else {
 		fclose(fichier);
 	}
 	
-	return;
+	return 0;
 }
 
 /*--------------------------------------------------------------------------------------------*/
