@@ -6,8 +6,10 @@
 #include "fonctions.h"
 
 
-/*Valider argument "Feries" saisi par l'utilisateur
-et le formater pour permettre ouverture du fichier dans autre fonction*/
+/*
+Valider argument "Feries" saisi par l'utilisateur
+et le formater pour permettre ouverture du fichier dans autre fonction
+*/
 
 int validerEtFormaterFeries(char **listeFeries, char *canton)
 {
@@ -27,6 +29,22 @@ int validerEtFormaterFeries(char **listeFeries, char *canton)
 
 /*--------------------------------------------------------------------------------------------*/
 
+/*
+Valider argument "Date" saisi par l'utilisateur
+et le formater pour permettre utilisation dans une autre fonction
+*/
+
+int validerEtFormaterDate(char **DateValide, char *Saisie)
+{
+	
+	
+	
+	
+}
+
+
+
+/*--------------------------------------------------------------------------------------------*/
 
 
 int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries, int tailleTabFeries)

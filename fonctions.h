@@ -12,6 +12,6 @@ struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierF
 
 int comparerDates(char premierJour[11], char dernierJour[11], struct datevent tabFeries[], int tailleTabFeries);
 
-
+int validerEtFormaterDate(char **DateValide, char *Saisie);
 
 void aide(void);
