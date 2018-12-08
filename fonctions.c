@@ -29,20 +29,6 @@ int validerEtFormaterFeries(char **listeFeries, char *canton)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries, int tailleTabFeries)
 {
 	double timeDifference=0;
@@ -242,7 +228,8 @@ struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierF
 		}
 		}
 	}	
-	
+
+free(*fichierFeries);
 fclose(fichier);
 return tabFeries;
 }

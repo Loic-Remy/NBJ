@@ -32,7 +32,8 @@ int *ptrTailleTab=&tailleTab;
 //printf("Canton: %s\tDebut: %s\tFin: %s",canton, debut, fin);
 
 validerEtFormaterFeries(&fichierFeries,canton);
-printf("\nFichier a ouvrir: %s",fichierFeries);
+
+//printf("\nFichier a ouvrir: %s",fichierFeries);
 
 tabFeries=chargerListeFeries(tabFeries,&fichierFeries,ptrTailleTab);
 
