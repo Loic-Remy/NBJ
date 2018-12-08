@@ -34,10 +34,9 @@ int *ptrTailleTab=&tailleTab;
 validerEtFormaterFeries(&fichierFeries,canton);
 printf("\nFichier a ouvrir: %s",fichierFeries);
 
-tabFeries=chargerListeFeries(tabFeries,canton,ptrTailleTab);
+tabFeries=chargerListeFeries(tabFeries,&fichierFeries,ptrTailleTab);
 
 comparerDates(debut,fin,tabFeries,tailleTab);
 
-system("PAUSE");
 return 0;
 }

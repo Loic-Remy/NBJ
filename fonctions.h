@@ -6,9 +6,9 @@ struct datevent {
 	char event[30];
 };
 
-int validerEtFormaterFeries(char **listeFeries, char canton[3]);
+int validerEtFormaterFeries(char **listeFeries, char *canton);
 
-struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[2], int *ptrTailleTab);
+struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierFeries, int *ptrTailleTab);
 
 int comparerDates(char premierJour[11], char dernierJour[11], struct datevent tabFeries[], int tailleTabFeries);
 

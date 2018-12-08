@@ -9,14 +9,8 @@
 /*Valider argument "Feries" saisi par l'utilisateur
 et le formater pour permettre ouverture du fichier dans autre fonction*/
 
-int validerEtFormaterFeries(char **listeFeries, char canton[3])
+int validerEtFormaterFeries(char **listeFeries, char *canton)
 {
-	int i=0;
-	
-	/*for(i=0; i<=1; i++) {
-		canton[i]=tolower(canton[i]);
-	}
-	*/
 	FILE *fichier=NULL;
 	*listeFeries=calloc(7,sizeof(char));
 	snprintf(*listeFeries,6,"%s.txt",canton);
@@ -175,7 +169,7 @@ printf("\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nb
 /*--------------------------------------------------------------------------------------------*/
 
 
-struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[3], int *ptrTailleTab)
+struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierFeries, int *ptrTailleTab)
 {
 	
 	struct tm date={0};
@@ -187,10 +181,7 @@ struct datevent *chargerListeFeries(struct datevent tabFeries[], char canton[3],
 	int i=0;
 	int n=0;
 	FILE *fichier=NULL;
-	
-	char cantonValide[7]={0};
-	snprintf(cantonValide,6,"%s.txt",canton);
-	fichier=fopen(cantonValide,"r");
+	fichier=fopen(*fichierFeries,"r");
 	
 	if(fichier==NULL) {
 		printf("Le fichier VS n'a pas pu etre ouvert");
