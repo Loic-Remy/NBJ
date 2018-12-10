@@ -6,12 +6,16 @@ struct datevent {
 	char event[30];
 };
 
+int recupererSaisie (int argc, char *argv[]);
+
 int validerEtFormaterFeries(char **listeFeries, char *canton);
+
+int validerEtFormaterDate(char **DateValide, char *Saisie);
 
 struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierFeries, int *ptrTailleTab);
 
 int comparerDates(char premierJour[11], char dernierJour[11], struct datevent tabFeries[], int tailleTabFeries);
 
-int validerEtFormaterDate(char **DateValide, char *Saisie);
+
 
 void aide(void);

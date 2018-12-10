@@ -7,6 +7,20 @@
 
 
 /*
+Recuperer la saisie utilisateur et stocker les arguments
+dans des variables
+*/
+
+int recupererSaisie (int argc, char *argv[])
+{
+	
+}
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+
+/*
 Valider argument "Feries" saisi par l'utilisateur
 et le formater pour permettre ouverture du fichier dans autre fonction
 */

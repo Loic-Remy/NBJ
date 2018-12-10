@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 char canton[3]={0};
 char debut[11]={0};
 char fin[11]={0};
+char tampon[100]={0};
 
 if (argc==1) {
 	printf("$ ");
@@ -38,6 +39,7 @@ validerEtFormaterFeries(&fichierFeries,canton);
 tabFeries=chargerListeFeries(tabFeries,&fichierFeries,ptrTailleTab);
 
 comparerDates(debut,fin,tabFeries,tailleTab);
+
 
 return 0;
 }
