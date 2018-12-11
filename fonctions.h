@@ -6,7 +6,7 @@ struct datevent {
 	char event[30];
 };
 
-int recupererSaisie (int argc, char *argv[]);
+int recupererSaisie(void);
 
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 

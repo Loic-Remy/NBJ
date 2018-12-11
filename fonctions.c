@@ -11,8 +11,30 @@ Recuperer la saisie utilisateur et stocker les arguments
 dans des variables
 */
 
-int recupererSaisie (int argc, char *argv[])
+int recupererSaisie(void)
 {
+	char c=0;
+	char tampon[40];
+	int longueur=0, argument=0;
+	int tab_argument[10];
+
+	fgets(tampon,40,stdin);
+	printf("%s",tampon);
+	
+	while(c!='\n'){
+		c=getc(tampon);
+		longueur++;
+		if(c==' ') {
+			argument++;
+			
+			strncpy(arg1,tampon,longueur-1);
+			
+		}
+		
+		
+	}
+
+	
 	
 }
 

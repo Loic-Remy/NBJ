@@ -14,9 +14,14 @@ char debut[11]={0};
 char fin[11]={0};
 char tampon[100]={0};
 
+
+
+
 if (argc==1) {
-	printf("$ ");
-	scanf("%s %s %s",&canton, &debut, &fin);
+	
+	recupererSaisie();
+//	printf("$ ");
+//	scanf("%s %s %s",&canton, &debut, &fin);
 	}
 else {
 	strcpy(canton,argv[1]);
