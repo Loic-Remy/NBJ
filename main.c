@@ -19,7 +19,7 @@ char tampon[100]={0};
 
 if (argc==1) {
 	
-	recupererSaisie();
+	recupererLigneCmde(50);
 //	printf("$ ");
 //	scanf("%s %s %s",&canton, &debut, &fin);
 	}

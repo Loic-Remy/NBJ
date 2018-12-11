@@ -6,7 +6,7 @@ struct datevent {
 	char event[30];
 };
 
-int recupererSaisie(void);
+int recupererLigneCmde(int tailleTampon);
 
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 

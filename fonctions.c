@@ -11,31 +11,45 @@ Recuperer la saisie utilisateur et stocker les arguments
 dans des variables
 */
 
-int recupererSaisie(void)
+int recupererLigneCmde(int tailleTampon)
 {
 	char c=0;
-	char tampon[40];
-	int longueur=0, argument=0;
-	int tab_argument[10];
+	char *tampon=calloc(tailleTampon,sizeof(int));
+	int i=0, longTampon=0, nbArguments=1, nbCar=0;
+	char ** ptr_tab = NULL;
+	char *tabArguments=NULL;
 
-	fgets(tampon,40,stdin);
+	fgets(tampon,tailleTampon,stdin);
 	printf("%s",tampon);
 	
-	while(c!='\n'){
-		c=getc(tampon);
-		longueur++;
-		if(c==' ') {
-			argument++;
-			
-			strncpy(arg1,tampon,longueur-1);
-			
+	longTampon=strlen(tampon);
+	printf("%d\n",longTampon);
+	
+	for(i=0; i<=longTampon; i++) {
+		if (tampon[i]==' ') {
+			nbArguments++;
 		}
-		
-		
 	}
-
+	printf("%d",nbArguments);		
+	
+	tabArguments=calloc(nbArguments,sizeof(char*));
+	ptr_tab=&tabArguments;
+	
+	nbArguments=0;
+	
+	for(i=0; i<=longTampon;i++) {
+		if (tampon[i]==' ') {
+			nbCar=i;
+			tabArguments[i]=calloc(nbCar,sizeof(char));
+			nbArguments++;
+			nbCar=0;
+		}
+	}	
 	
 	
+	
+	
+	free(tampon);
 }
 
 
