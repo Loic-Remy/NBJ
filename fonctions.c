@@ -15,7 +15,8 @@ int recupererLigneCmde(int tailleTampon)
 {
 	char c=0;
 	char *tampon=calloc(tailleTampon,sizeof(int));
-	int i=0, longTampon=0, nbArguments=1, nbCar=0;
+	char *tampArg=calloc(tailleTampon,sizeof(int));
+	int i=0, longTampon=0, nbArguments=1, arg=0, nbCar=0;
 	char ***ptr_tab = NULL;
 	char **tabArguments=NULL;
 
@@ -35,26 +36,24 @@ int recupererLigneCmde(int tailleTampon)
 	tabArguments=calloc(nbArguments,sizeof(char*));
 	ptr_tab=&tabArguments;
 	
-	nbArguments=0;
-	
 	for(i=0; i<=longTampon; i++) {
-		if (tampon[i]==' ') {
-			nbCar=i;
-			tabArguments[nbArguments]=(char*)calloc(nbCar,sizeof(char));
-			tabArguments[nbArguments][0]='c';
-			tabArguments[nbArguments][1]='a';
-			nbArguments++;
-			nbCar=0;
+		if (tampon[i]==' ' || tampon[i]=='\n') {
+			tampArg[i]='\n';
+			tabArguments[arg]=(char*)calloc(strlen(tampArg),sizeof(char));
+			strcpy(tabArguments[arg],tampArg);
+			if (arg<nbArguments-1) {
+				arg++;
+			}
 		}
-		else if (tampon[i]=='\n') {
-			nbCar=i;
-			tabArguments[nbArguments]=(char*)calloc(nbCar,sizeof(char));
-			tabArguments[nbArguments][0]='c';
-			tabArguments[nbArguments][1]='a';
+		else {
+			tampArg[i]=tampon[i];
 		}
 	}	
 	
-	for (i=0; i<=nbArguments; i++){
+	printf("\ntampArg : %s",tampArg);
+	printf("\nstrlen tampArg : %d",strlen(tampArg));
+	
+	for (i=0; i<=arg; i++){
 	printf("\nArg[%d] : %s",i, tabArguments[i]);
 		}
 	
