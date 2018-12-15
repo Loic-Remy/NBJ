@@ -7,8 +7,9 @@
 
 
 /*
-Recuperer la saisie utilisateur et stocker les arguments
-dans des variables
+Recuperer la saisie utilisateur
+en ligne de commande et stocker 
+les argumentsdans des variables
 */
 
 int recupererLigneCmde(int tailleTampon)
@@ -21,44 +22,36 @@ int recupererLigneCmde(int tailleTampon)
 	char **tabArguments=NULL;
 
 	fgets(tampon,tailleTampon,stdin);
-	printf("%s",tampon);
 	
 	longTampon=strlen(tampon);
-	printf("%d\n",longTampon);
 	
 	for(i=0; i<=longTampon; i++) {
 		if (tampon[i]==' ') {
 			nbArguments++;
 		}
-	}
-	printf("%d",nbArguments);		
+	}	
 	
 	tabArguments=calloc(nbArguments,sizeof(char*));
 	ptr_tab=&tabArguments;
 	
 	for(i=0; i<=longTampon; i++) {
 		if (tampon[i]==' ' || tampon[i]=='\n') {
-			tampArg[i]='\n';
-			tabArguments[arg]=(char*)calloc(strlen(tampArg),sizeof(char));
+			tampArg[i]='\0';
+			tabArguments[arg]=(char*)calloc(strlen(tampArg)+1,sizeof(char));
 			strcpy(tabArguments[arg],tampArg);
+			nbCar=nbCar+strlen(tampArg)+1;
+			memset(tampArg,0,strlen(tampArg));
 			if (arg<nbArguments-1) {
 				arg++;
 			}
 		}
-		else {
-			tampArg[i]=tampon[i];
+		else {		
+			tampArg[i-nbCar]=tampon[i];
 		}
 	}	
 	
-	printf("\ntampArg : %s",tampArg);
-	printf("\nstrlen tampArg : %d",strlen(tampArg));
-	
-	for (i=0; i<=arg; i++){
-	printf("\nArg[%d] : %s",i, tabArguments[i]);
-		}
-	
-	
 	free(tampon);
+
 }
 
 

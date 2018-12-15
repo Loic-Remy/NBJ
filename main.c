@@ -14,9 +14,6 @@ char debut[11]={0};
 char fin[11]={0};
 char tampon[100]={0};
 
-
-
-
 if (argc==1) {
 	
 	recupererLigneCmde(50);
