@@ -12,13 +12,13 @@ en ligne de commande et stocker
 les argumentsdans des variables
 */
 
-int recupererLigneCmde(char **tabArguments, int tailleTampon)
+int recupererLigneCmde(char ***ptrTabArguments, int tailleTampon)
 {
 	char c=0;
 	char *tampon=calloc(tailleTampon,sizeof(int));
 	char *tampArg=calloc(tailleTampon,sizeof(int));
 	int i=0, longTampon=0, nbArguments=1, arg=0, nbCar=0; 
-//	char **tabArguments=NULL;
+	char **tabArguments=NULL;
 
 	fgets(tampon,tailleTampon,stdin);
 	
@@ -30,7 +30,8 @@ int recupererLigneCmde(char **tabArguments, int tailleTampon)
 		}
 	}	
 	
-	*tabArguments=calloc(nbArguments,sizeof(char*));
+	tabArguments=calloc(nbArguments,sizeof(char*));
+	*ptrTabArguments=tabArguments;
 	
 	for(i=0; i<=longTampon; i++) {
 		if (tampon[i]==' ' || tampon[i]=='\n') {
@@ -220,7 +221,7 @@ printf("\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nb
 /*--------------------------------------------------------------------------------------------*/
 
 
-struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierFeries, int *ptrTailleTab)
+struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab)
 {
 	
 	struct tm date={0};
@@ -231,6 +232,7 @@ struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierF
 	char c=0;
 	int i=0;
 	int n=0;
+	struct datevent *tabFeries=NULL;
 	FILE *fichier=NULL;
 	fichier=fopen(*fichierFeries,"r");
 	

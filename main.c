@@ -13,15 +13,15 @@ char canton[3]={0};
 char debut[11]={0};
 char fin[11]={0};
 char tampon[100]={0};
-char *tabArguments=NULL;
+char **tabArguments=NULL;
 
 if (argc==1) {
 	
 	recupererLigneCmde(&tabArguments,50);
 //	printf("$ ");
 //	scanf("%s %s %s",&canton, &debut, &fin);
-	printf("Arg 0 : %s", tabArguments[0]);
-	printf("Arg 1 : %s", tabArguments[1]);
+	printf("\nArg 0 : %s", tabArguments[0]);
+	printf("\nArg 1 : %s", tabArguments[1]);
 	}
 else {
 	strcpy(canton,argv[1]);
@@ -41,7 +41,7 @@ validerEtFormaterFeries(&fichierFeries,canton);
 
 //printf("\nFichier a ouvrir: %s",fichierFeries);
 
-tabFeries=chargerListeFeries(tabFeries,&fichierFeries,ptrTailleTab);
+tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);
 
 comparerDates(debut,fin,tabFeries,tailleTab);
 

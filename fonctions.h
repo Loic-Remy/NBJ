@@ -6,13 +6,13 @@ struct datevent {
 	char event[30];
 };
 
-int recupererLigneCmde(char **ptr_tab, int tailleTampon);
+int recupererLigneCmde(char ***ptrTabArguments, int tailleTampon);
 
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 
 int validerEtFormaterDate(char **DateValide, char *Saisie);
 
-struct datevent *chargerListeFeries(struct datevent tabFeries[], char **fichierFeries, int *ptrTailleTab);
+struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab);
 
 int comparerDates(char premierJour[11], char dernierJour[11], struct datevent tabFeries[], int tailleTabFeries);
 
