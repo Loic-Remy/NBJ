@@ -12,14 +12,13 @@ en ligne de commande et stocker
 les argumentsdans des variables
 */
 
-int recupererLigneCmde(int tailleTampon)
+int recupererLigneCmde(char **tabArguments, int tailleTampon)
 {
 	char c=0;
 	char *tampon=calloc(tailleTampon,sizeof(int));
 	char *tampArg=calloc(tailleTampon,sizeof(int));
-	int i=0, longTampon=0, nbArguments=1, arg=0, nbCar=0;
-	char ***ptr_tab = NULL;
-	char **tabArguments=NULL;
+	int i=0, longTampon=0, nbArguments=1, arg=0, nbCar=0; 
+//	char **tabArguments=NULL;
 
 	fgets(tampon,tailleTampon,stdin);
 	
@@ -31,26 +30,25 @@ int recupererLigneCmde(int tailleTampon)
 		}
 	}	
 	
-	tabArguments=calloc(nbArguments,sizeof(char*));
-	ptr_tab=&tabArguments;
+	*tabArguments=calloc(nbArguments,sizeof(char*));
 	
 	for(i=0; i<=longTampon; i++) {
 		if (tampon[i]==' ' || tampon[i]=='\n') {
 			tampArg[i]='\0';
-			tabArguments[arg]=(char*)calloc(strlen(tampArg)+1,sizeof(char));
+			tabArguments[arg]=calloc(strlen(tampArg)+1,sizeof(char));
 			strcpy(tabArguments[arg],tampArg);
 			nbCar=nbCar+strlen(tampArg)+1;
 			memset(tampArg,0,strlen(tampArg));
 			if (arg<nbArguments-1) {
 				arg++;
 			}
-		}
+		}		
 		else {		
 			tampArg[i-nbCar]=tampon[i];
 		}
 	}	
-	
 	free(tampon);
+return 0;
 
 }
 

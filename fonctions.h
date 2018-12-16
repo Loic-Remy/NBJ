@@ -6,7 +6,7 @@ struct datevent {
 	char event[30];
 };
 
-int recupererLigneCmde(int tailleTampon);
+int recupererLigneCmde(char **ptr_tab, int tailleTampon);
 
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 
