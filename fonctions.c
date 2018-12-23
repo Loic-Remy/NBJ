@@ -20,7 +20,7 @@ int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
 	size_t i=0, longTampon=0, nbArguments=1, arg=1, nbCar=0; 
 	char **tabArguments=NULL;
 	
-	printf("$ ");
+	printf("\n$ ");
 	fgets(tampon,tailleTampon,stdin);
 	
 	longTampon=strlen(tampon);

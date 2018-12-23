@@ -8,12 +8,15 @@
 
 int main(int argc, char *argv[]) 
 {
-
-char canton[3]={0};
-char debut[11]={0};
-char fin[11]={0};
-char tampon[100]={0};
 size_t bufSize=50;
+char *fichierFeries=NULL;
+struct datevent *tabFeries=NULL;
+
+int tailleTab=0;
+int *ptrTailleTab=&tailleTab;
+
+
+do {
 
 if (argc==1) {
 	recupererLigneCmde(&argv,bufSize);
@@ -29,23 +32,36 @@ printf("\n");
 system("PAUSE");
 FIN ZONE DE TEST */
 
-char *fichierFeries=NULL;
-struct datevent *tabFeries=NULL;
+//printf("Cmde: %s\tCanton: %s\tDebut: %s\tFin: %s",argv[1], argv[2], argv[3], argv[4]);
 
-int tailleTab=0;
-int *ptrTailleTab=&tailleTab;
+if (strcmp(argv[1],"calc")==0) {
+	
+	validerEtFormaterFeries(&fichierFeries,argv[2]);
+	printf("\nFichier a ouvrir: %s",fichierFeries);
+	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);
+	comparerDates(argv[3],argv[4],tabFeries,tailleTab);
+	}		
+	else if (strcmp(argv[1],"edit")==0) {
+		
+	}
+	else if (strcmp(argv[1],"help")==0) {
+		
+		aide();
+	}	
+	else if (strcmp(argv[1],"exit")==0) {
+		
+		exit(EXIT_SUCCESS);
+	}		
+	else {
+		
+		printf("\nCommande inconnue. Tapez la commande 'help' pour obtenir de l'aide.\n");
+	}		
 
-printf("Cmde: %s\tCanton: %s\tDebut: %s\tFin: %s",argv[1], argv[2], argv[3], argv[4]);
+//printf("\n");
+//system("PAUSE");
 
-validerEtFormaterFeries(&fichierFeries,argv[2]);
-
-printf("\nFichier a ouvrir: %s",fichierFeries);
-
-tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);
-
-comparerDates(argv[3],argv[4],tabFeries,tailleTab);
-
-
+}
+while (strcmp(argv[1],"exit")!=0);
 
 return 0;
 }
