@@ -14,10 +14,11 @@ char debut[11]={0};
 char fin[11]={0};
 char tampon[100]={0};
 char **tabArguments=NULL;
+size_t bufSize=50;
 
 if (argc==1) {
 	
-	recupererLigneCmde(&tabArguments,50);
+	recupererLigneCmde(&tabArguments,bufSize);
 	}
 else {
 	strcpy(canton,argv[1]);

@@ -12,12 +12,12 @@ en ligne de commande et stocker
 les argumentsdans des variables
 */
 
-int recupererLigneCmde(char ***ptrTabArguments, int tailleTampon)
+int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
 {
 	char c=0;
 	char *tampon=calloc(tailleTampon,sizeof(int));
 	char *tampArg=calloc(tailleTampon,sizeof(int));
-	int i=0, longTampon=0, nbArguments=1, arg=1, nbCar=0; 
+	size_t i=0, longTampon=0, nbArguments=1, arg=1, nbCar=0; 
 	char **tabArguments=NULL;
 	
 	printf("$ ");
@@ -50,6 +50,11 @@ int recupererLigneCmde(char ***ptrTabArguments, int tailleTampon)
 		}
 	}	
 	free(tampon);
+	
+	for (i=0; i<=nbArguments; i++) {
+		printf("\nArgument [%d] : %s",i, tabArguments[i]);
+	}
+	
 return 0;
 
 }
