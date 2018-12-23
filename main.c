@@ -18,10 +18,6 @@ char **tabArguments=NULL;
 if (argc==1) {
 	
 	recupererLigneCmde(&tabArguments,50);
-//	printf("$ ");
-//	scanf("%s %s %s",&canton, &debut, &fin);
-	printf("\nArg 0 : %s", tabArguments[0]);
-	printf("\nArg 1 : %s", tabArguments[1]);
 	}
 else {
 	strcpy(canton,argv[1]);
