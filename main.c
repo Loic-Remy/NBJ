@@ -41,21 +41,28 @@ if (strcmp(argv[1],"calc")==0) {
 	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);
 	comparerDates(argv[3],argv[4],tabFeries,tailleTab);
 	argc=1;
-	}		
-	else if (strcmp(argv[1],"edit")==0) {
-		
 	}
-	else if (strcmp(argv[1],"help")==0) {
+else if (strcmp(argv[1],"loc")==0) {
+	
+	argc=1;	
+	}
+else if (strcmp(argv[1],"edit")==0) {
+	
+	argc=1;	
+	}
+else if (strcmp(argv[1],"help")==0) {
 		
-		aide();
+	aide();
+	argc=1;
 	}	
-	else if (strcmp(argv[1],"exit")==0) {
+else if (strcmp(argv[1],"exit")==0) {
 		
-		exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 	}		
-	else {
+else {
 		
-		printf("\nCommande inconnue. Tapez la commande 'help' pour obtenir de l'aide.\n");
+	printf("\nCommande inconnue. Tapez la commande 'help' pour obtenir de l'aide.\n");
+	argc=1;
 	}		
 
 //printf("\n");

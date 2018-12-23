@@ -315,9 +315,12 @@ return tabFeries;
 
 /*--------------------------------------------------------------------------------------------*/
 
-void aide(void)
-{
-	printf("\nRepertoir des commandes disponibles\n\n");
-	printf("help : affiche l'ensemble des commandes disponibles et leurs arguments \n\n");
-	printf("calc : calcul le nombre de jours ouvres entre deux dates");
+void aide(void) {
+	printf("\nRepertoir des commandes disponibles\n");
+	printf("\ncalc\t: calcul le nombre de jours ouvres entre deux dates");
+	printf("\nloc\t: effectue les operations de calcul sur la base de donnees externes");
+	printf("\nedit\t: modifie les listes de feries");
+	printf("\nhelp\t: affiche l'ensemble des commandes disponibles et leurs arguments");
+	printf("\nexit\t: quitte le programme");
+
 }

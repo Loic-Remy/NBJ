@@ -6,4 +6,4 @@
 01.08.2018,"Fête nationale"
 06.09.2018,"Jeune genevois"
 25.12.2018,"Noel"
-31.12.2018,"Restauration de la Republique"
+31.12.2018,"Restauration Republique"
