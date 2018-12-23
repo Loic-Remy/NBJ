@@ -40,6 +40,7 @@ if (strcmp(argv[1],"calc")==0) {
 	printf("\nFichier a ouvrir: %s",fichierFeries);
 	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);
 	comparerDates(argv[3],argv[4],tabFeries,tailleTab);
+	argc=1;
 	}		
 	else if (strcmp(argv[1],"edit")==0) {
 		
