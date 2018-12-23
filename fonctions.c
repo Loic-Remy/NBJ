@@ -9,7 +9,7 @@
 /*
 Recuperer la saisie utilisateur
 en ligne de commande et stocker 
-les argumentsdans des variables
+les arguments dans des variables
 */
 
 int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
@@ -51,10 +51,11 @@ int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
 	}	
 	free(tampon);
 	
+	/* DEBUT ZONE DE TEST
 	for (i=0; i<=nbArguments; i++) {
 		printf("\nArgument [%d] : %s",i, tabArguments[i]);
 	}
-	
+	FIN ZONE DE TEST*/
 return 0;
 
 }

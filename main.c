@@ -13,18 +13,21 @@ char canton[3]={0};
 char debut[11]={0};
 char fin[11]={0};
 char tampon[100]={0};
-char **tabArguments=NULL;
 size_t bufSize=50;
 
 if (argc==1) {
-	
-	recupererLigneCmde(&tabArguments,bufSize);
+	recupererLigneCmde(&argv,bufSize);
 	}
-else {
-	strcpy(canton,argv[1]);
-	strcpy(debut,argv[2]);
-	strcpy(fin,argv[3]);
-}
+
+/*DEBUT ZONE DE TEST
+size_t i=0;
+for (i=0; i<=argc; i++) {
+	printf("\nArgument [%d] : %s",i, argv[i]);
+	}
+
+printf("\n");
+system("PAUSE");
+FIN ZONE DE TEST */
 
 char *fichierFeries=NULL;
 struct datevent *tabFeries=NULL;
@@ -32,15 +35,16 @@ struct datevent *tabFeries=NULL;
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 
-//printf("Canton: %s\tDebut: %s\tFin: %s",canton, debut, fin);
+printf("Cmde: %s\tCanton: %s\tDebut: %s\tFin: %s",argv[1], argv[2], argv[3], argv[4]);
 
-validerEtFormaterFeries(&fichierFeries,canton);
+validerEtFormaterFeries(&fichierFeries,argv[2]);
 
-//printf("\nFichier a ouvrir: %s",fichierFeries);
+printf("\nFichier a ouvrir: %s",fichierFeries);
 
 tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);
 
-comparerDates(debut,fin,tabFeries,tailleTab);
+comparerDates(argv[3],argv[4],tabFeries,tailleTab);
+
 
 
 return 0;
