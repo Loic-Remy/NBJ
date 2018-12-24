@@ -95,15 +95,16 @@ et le formater pour permettre utilisation dans une autre fonction
 
 int validerEtFormaterDate(char **dateValide, char *saisie, int formatEntree)
 {
-	int separateurs[4]={0};
+	int decalage[4]={2,2,4,0};
 	char c=0;
 	size_t i=0, nbSeparateurs=0, longueur=0;
+	*dateValide=calloc(11,sizeof(char));
 	
 	for (i=0; i<=strlen(saisie); i++) {
 		c=saisie[i];
 		longueur++;
 		if (c<48 || c>57) {
-			separateurs[nbSeparateurs]=longueur-1;
+			decalage[nbSeparateurs]=decalage[nbSeparateurs]-(longueur-1);
 			nbSeparateurs++;
 			longueur=0;
 		}
@@ -112,11 +113,11 @@ int validerEtFormaterDate(char **dateValide, char *saisie, int formatEntree)
 			return 0;
 		}
 	}
-	
-	for (i=0; i<=11; i++) {
-		
-		
+	nbSeparateurs=0;
+	for (i=0; i<=10; i++) {
+		*dateValide[i]=saisie[i-decalage[nbseparateurs]]
 	}
+	
 	
 }
 
@@ -344,3 +345,43 @@ void aide(void) {
 	printf("\nexit\t: quitte le programme");
 
 }
+
+
+/*	if (separateurs[0]==1) {
+			*dateValide[0]=0;
+			*dateValide[1]=saisie[0];
+		}
+		else {
+			*dateValide[0]=(char)saisie[0];
+			*dateValide[1]=(char)saisie[1];
+		}
+		*dateValide[2]=".";
+		if (separateurs[1]==1) {
+			*dateValide[3]=0;
+			*dateValide[4]=(char)saisie[separateurs[0]+2];
+		}
+		else {
+			*dateValide[3]=(char)saisie[separateurs[0]+1];
+			*dateValide[4]=(char)saisie[separateurs[0]+2];
+		}
+		*dateValide[5]=".";
+		if (separateurs[2]==0) {
+			*dateValide[6]=2;
+			*dateValide[7]=0;
+			*dateValide[8]=1;
+			*dateValide[9]=8;
+		}
+		else if (separateurs[2]==2) {
+			*dateValide[6]=2;
+			*dateValide[7]=0;
+			*dateValide[8]=(char)saisie[separateurs[0]+separateurs[1]+2];
+			*dateValide[9]=(char)saisie[separateurs[0]+separateurs[1]+3];
+		}
+		else {
+			*dateValide[6]=(char)saisie[separateurs[0]+separateurs[1]+1];
+			*dateValide[7]=(char)saisie[separateurs[0]+separateurs[1]+2];
+			*dateValide[8]=(char)saisie[separateurs[0]+separateurs[1]+3];
+			*dateValide[9]=(char)saisie[separateurs[0]+separateurs[1]+4];
+		}
+		*/
+		
