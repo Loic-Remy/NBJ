@@ -10,7 +10,7 @@ int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon);
 
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 
-int validerEtFormaterDate(char **DateValide, char *Saisie);
+int validerEtFormaterDate(char **dateValide, char *saisie, int formatEntree);
 
 struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab);
 

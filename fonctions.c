@@ -57,10 +57,7 @@ int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
 	}
 	FIN ZONE DE TEST*/
 return 0;
-
 }
-
-
 
 /*--------------------------------------------------------------------------------------------*/
 
@@ -90,13 +87,36 @@ int validerEtFormaterFeries(char **listeFeries, char *canton)
 /*
 Valider argument "Date" saisi par l'utilisateur
 et le formater pour permettre utilisation dans une autre fonction
+-recuperer le string (saisie),
+-vérifier son format (nombre de séparateurs et taille),
+- copier les caractères dans un string 'formaté'
+- renvoyer ce string en resultat (dateValide)
 */
 
-int validerEtFormaterDate(char **DateValide, char *Saisie)
+int validerEtFormaterDate(char **dateValide, char *saisie, int formatEntree)
 {
+	int separateurs[4]={0};
+	char c=0;
+	size_t i=0, nbSeparateurs=0, longueur=0;
 	
+	for (i=0; i<=strlen(saisie); i++) {
+		c=saisie[i];
+		longueur++;
+		if (c<48 || c>57) {
+			separateurs[nbSeparateurs]=longueur-1;
+			nbSeparateurs++;
+			longueur=0;
+		}
+		else if (nbSeparateurs==4) {
+			printf("\nFormat de date non valide. Format requis : jj.mm.aaaa ou j.m.aa");
+			return 0;
+		}
+	}
 	
-	
+	for (i=0; i<=11; i++) {
+		
+		
+	}
 	
 }
 
