@@ -132,31 +132,28 @@ int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree)
 		longueur=i+1;
 		}
 	}
-	date->tm_hour=0;
-	date->tm_min=0;
-	date->tm_sec=0;
-	
+
 return 0;	
 }
 
 /*--------------------------------------------------------------------------------------------*/
 
+/*
+Reçoit les dates debut et fin ainsi que la liste des feries et la taille de ce tab.
+Elle convertie en time_t les struct tm reçues puis teste chaque date afin de voir
+si ce n'est pas : un férié, un samedi, un dimanche.
+Elle affiche ensuite le résultat (printf).
+*/
 
 int comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int tailleTabFeries)
 {
-	double timeDifference=0;
-	char tamponSaisie[4]={0};
-	struct tm check={0};
-		
 	time_t timeStart=0;
 	time_t timeEnd=0;
 	time_t timeCheck=0;
+	struct tm check={0};
 	
-	int nbOuvres=0;
-	int nbSam=0;
-	int nbDim=0;
-	int nbFeries=0;
-	int i=0;
+	size_t nbOuvres=0, nbSam=0, nbDim=0, nbFeries=0;
+	size_t i=0;
 	
 	timeStart=mktime(debut);
 	timeEnd=mktime(fin);

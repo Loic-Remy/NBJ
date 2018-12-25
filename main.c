@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 size_t bufSize=50;
 char *fichierFeries=NULL;
 struct datevent *tabFeries=NULL;
-struct tm debut, fin;
+struct tm debut={0}, fin={0};
 struct tm *ptDebut=&debut, *ptFin=&fin;
 
 int tailleTab=0;
@@ -39,13 +39,9 @@ FIN ZONE DE TEST */
 if (strcmp(argv[1],"calc")==0) {
 	
 	validerEtFormaterFeries(&fichierFeries,argv[2]);
-//	printf("\nFichier a ouvrir: %s",fichierFeries);
-	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);
-	
+	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);	
 	validerEtFormaterDate(ptDebut,argv[3],0);
-	validerEtFormaterDate(ptFin,argv[4],0);
-	
-	
+	validerEtFormaterDate(ptFin,argv[4],0);	
 	comparerDates(ptDebut,ptFin,tabFeries,tailleTab);
 	argc=1;
 	}
