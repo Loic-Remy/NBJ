@@ -93,12 +93,12 @@ et le formater pour permettre utilisation dans une autre fonction
 - renvoyer ce string en resultat (dateValide)
 */
 
-int validerEtFormaterDate(char **dateValide, char *saisie, int formatEntree)
+int validerEtFormaterDate(struct tm **date, char *saisie, int formatEntree)
 {
 	int decalage[4]={2,2,4,0};
 	char c=0;
+	char tampon[4];
 	size_t i=0, nbSeparateurs=0, longueur=0;
-	*dateValide=calloc(11,sizeof(char));
 	
 	for (i=0; i<=strlen(saisie); i++) {
 		c=saisie[i];
@@ -113,12 +113,27 @@ int validerEtFormaterDate(char **dateValide, char *saisie, int formatEntree)
 			return 0;
 		}
 	}
+	longueur=0;
 	nbSeparateurs=0;
-	for (i=0; i<=10; i++) {
-		*dateValide[i]=saisie[i-decalage[nbseparateurs]]
+	for (i=0; i<=strlen(saisie); i++) {
+		tampon[i-longueur]=saisie[i];
+		if (strlen(tampon)==decalage[nbSeparateurs]) {
+			if (nbSeparateurs==0) {
+				*date.tm_mday=atoi(tampon);
+			}
+			else if (nbSeparateurs==1) {
+				*date.tm_mon=atoi(tampon);
+			}
+			else if (nbSeparateurs==2) {
+				*date.tm_year=atoi(tampon);
+			}
+		memset(tampon,0,4);
+		nbSeparateurs++;
+		i++;
+		longueur=longueur+i+nbSeparateurs;
+		}
 	}
-	
-	
+return 0;	
 }
 
 
