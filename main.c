@@ -46,7 +46,7 @@ if (strcmp(argv[1],"calc")==0) {
 	validerEtFormaterDate(ptFin,argv[4],0);
 	
 	
-	comparerDates(argv[3],argv[4],tabFeries,tailleTab);
+	comparerDates(ptDebut,ptFin,tabFeries,tailleTab);
 	argc=1;
 	}
 else if (strcmp(argv[1],"loc")==0) {

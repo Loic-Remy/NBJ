@@ -89,8 +89,7 @@ Valider argument "Date" saisi par l'utilisateur
 et le formater pour permettre utilisation dans une autre fonction
 -recuperer le string (saisie),
 -vérifier son format (nombre de séparateurs et taille),
-- copier les caractères dans un string 'formaté'
-- renvoyer ce string en resultat (dateValide)
+- copier les caractères dans une structure (struct tm)
 */
 
 int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree)
@@ -140,17 +139,13 @@ int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree)
 return 0;	
 }
 
-
-
 /*--------------------------------------------------------------------------------------------*/
 
 
-int comparerDates(char premierJour[11], char dernierJour [11], struct datevent * tabFeries, int tailleTabFeries)
+int comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int tailleTabFeries)
 {
 	double timeDifference=0;
 	char tamponSaisie[4]={0};
-	struct tm debut={0};
-	struct tm fin={0};
 	struct tm check={0};
 		
 	time_t timeStart=0;
@@ -163,102 +158,28 @@ int comparerDates(char premierJour[11], char dernierJour [11], struct datevent *
 	int nbFeries=0;
 	int i=0;
 	
-	for (i=0; i<=10; i++) {
-		if (i<2) {
-			tamponSaisie[i]=premierJour[i];
-		}
-		else if (i==2) {
-			debut.tm_mday=atoi(tamponSaisie);
-			memset(tamponSaisie,0,4);
-		}
-		else if (i<5 && i>2) {
-			tamponSaisie[i-3]=premierJour[i];
-		}
-		else if (i==5) {
-			debut.tm_mon=atoi(tamponSaisie)-1;
-			memset(tamponSaisie,0,4);
-		}
-		else if (i<10 && i>5) {
-			tamponSaisie[i-6]=premierJour[i];
-		}
-		else if (i==10) {
-			debut.tm_year=atoi(tamponSaisie)-1900;
-			memset(tamponSaisie,0,4);
-			debut.tm_hour=0;
-			debut.tm_min=0;
-			debut.tm_sec=0;
-			debut.tm_isdst=0;
-		}
-		else
-		{
-			printf("ERREUR: Format de date de debut incorrect");
+	timeStart=mktime(debut);
+	timeEnd=mktime(fin);
+	timeCheck=timeStart;
+				
+	while (timeCheck<=timeEnd) {
+		check=*localtime(&timeCheck);	
+		if (check.tm_wday==6) {
+			nbSam++;
+		}		
+		else if (check.tm_wday==0){
+			nbDim++;
 		}	
-	}
-
-	timeStart=mktime(&debut);
-	
-	i=0;
-	
-	for (i=0; i<=10; i++) {
-		if (i<2) {
-			tamponSaisie[i]=dernierJour[i];
-		}
-		else if (i==2) {
-			fin.tm_mday=atoi(tamponSaisie);
-			memset(tamponSaisie,0,4);
-		}
-		else if (i<5 && i>2) {
-			tamponSaisie[i-3]=dernierJour[i];
-		}
-		else if (i==5) {
-			fin.tm_mon=atoi(tamponSaisie)-1;
-			memset(tamponSaisie,0,4);
-		}
-		else if (i<10 && i>5) {
-			tamponSaisie[i-6]=dernierJour[i];
-		}
-		else if (i==10) {
-			fin.tm_year=atoi(tamponSaisie)-1900;
-			memset(tamponSaisie,0,9);
-			fin.tm_hour=0;
-			fin.tm_min=0;
-			fin.tm_sec=0;
-			fin.tm_isdst=0;
-		}
-		else
-		{
-			printf("ERREUR: Format de date de fin incorrect");
-		}	
-	}
-	timeEnd=mktime(&fin);
-
-timeCheck=timeStart;			
-while (timeCheck<=timeEnd) {
-	
-	check=*localtime(&timeCheck);
-	
-	
-	
-	if (check.tm_wday==6) {
-		nbSam++;
-	}		
-	else if (check.tm_wday==0){
-		nbDim++;
-	}	
-	else {
-		nbOuvres++;
-		
-		for (i=0;i<tailleTabFeries;i++) {
-			
-			if (timeCheck==tabFeries[i].date) {
-				nbFeries++;
-				nbOuvres--;
+		else {
+			nbOuvres++;
+				for (i=0;i<tailleTabFeries;i++) {
+					if (timeCheck==tabFeries[i].date) {
+						nbFeries++;
+						nbOuvres--;
 			}
 		}
-
 	}
 	timeCheck=timeCheck+(60*60*24);
-	
 }
 
 printf("\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);

@@ -14,7 +14,7 @@ int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree);
 
 struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab);
 
-int comparerDates(char premierJour[11], char dernierJour[11], struct datevent tabFeries[], int tailleTabFeries);
+int comparerDates(struct tm *debut, struct tm *fin, struct datevent tabFeries[], int tailleTabFeries);
 
 
 
