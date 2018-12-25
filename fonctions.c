@@ -93,9 +93,9 @@ et le formater pour permettre utilisation dans une autre fonction
 - renvoyer ce string en resultat (dateValide)
 */
 
-int validerEtFormaterDate(struct tm **date, char *saisie, int formatEntree)
+int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree)
 {
-	int decalage[4]={2,2,4,0};
+	int decalage[4]={0,0,0,0};
 	char c=0;
 	char tampon[4];
 	size_t i=0, nbSeparateurs=0, longueur=0;
@@ -104,7 +104,7 @@ int validerEtFormaterDate(struct tm **date, char *saisie, int formatEntree)
 		c=saisie[i];
 		longueur++;
 		if (c<48 || c>57) {
-			decalage[nbSeparateurs]=decalage[nbSeparateurs]-(longueur-1);
+			decalage[nbSeparateurs]=(longueur-1);
 			nbSeparateurs++;
 			longueur=0;
 		}
@@ -119,20 +119,24 @@ int validerEtFormaterDate(struct tm **date, char *saisie, int formatEntree)
 		tampon[i-longueur]=saisie[i];
 		if (strlen(tampon)==decalage[nbSeparateurs]) {
 			if (nbSeparateurs==0) {
-				*date.tm_mday=atoi(tampon);
+				date->tm_mday=atoi(tampon);
 			}
 			else if (nbSeparateurs==1) {
-				*date.tm_mon=atoi(tampon);
+				date->tm_mon=atoi(tampon)-1;
 			}
 			else if (nbSeparateurs==2) {
-				*date.tm_year=atoi(tampon);
+				date->tm_year=atoi(tampon)-1900;
 			}
 		memset(tampon,0,4);
 		nbSeparateurs++;
 		i++;
-		longueur=longueur+i+nbSeparateurs;
+		longueur=i+1;
 		}
 	}
+	date->tm_hour=0;
+	date->tm_min=0;
+	date->tm_sec=0;
+	
 return 0;	
 }
 
