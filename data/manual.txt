@@ -1,0 +1,5 @@
+calc,calc,"calcule le nombre de jours ouvres entre deux dates"
+calc,"argument 1","Liste de feries a prendre en compte"
+calc,"argument 2","Premier jour du décompte"
+calc,"argument 3","Dernier jour du décompte"
+loc,loc,"effectue les operations de calcul sur la base de donnees externes"

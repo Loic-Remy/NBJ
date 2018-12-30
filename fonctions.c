@@ -63,8 +63,8 @@ return 0;
 /*--------------------------------------------------------------------------------------------*/
 
 /*
-Définir l'année à utiliser pour l'autocomplétion
-lorsque l'utilisateur n'a pas défini d'année dans la fonction 'calc'
+Définir l'année à utiliser pour l'autocomplétion de l'année
+lorsque l'utilisateur ne l'a pas définie dans la fonction 'calc'
 	userChoice = reçoit le choix de l'utilisateur (soit une année soit '0' pour auto)
 	varOption = reçoit la variable à modifier une fois l'année déterminée
 */
@@ -94,8 +94,10 @@ complYear(int userChoice, int *varOption)
 /*--------------------------------------------------------------------------------------------*/
 
 /*
-Valider argument "Feries" saisi par l'utilisateur
+Valider l'argument "Feries" saisi par l'utilisateur
 et le formater pour permettre ouverture du fichier dans autre fonction
+	listeFeries = indique le pointeur qui recevra la liste de date à exclure
+	canton = liste de feries à utilisée, saisi par l'utilisateur
 */
 
 int 
