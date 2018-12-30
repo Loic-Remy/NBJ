@@ -8,7 +8,7 @@ struct datevent {
 
 int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon);
 
-int complYear(char *userChoice, int *varOption);
+int complYear(int userChoice, int *varOption);
 
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 
@@ -20,4 +20,4 @@ int comparerDates(struct tm *debut, struct tm *fin, struct datevent tabFeries[],
 
 
 
-void aide(void);
+void help(void);

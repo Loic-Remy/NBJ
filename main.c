@@ -18,6 +18,7 @@ int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 int autoYear=0;
 
+complYear(0,&autoYear);
 
 do {
 
@@ -57,13 +58,25 @@ else if (strcmp(argv[1],"edit")==0) {
 	}
 else if (strcmp(argv[1],"set")==0) {
 	
-	complYear(argv[2],&autoYear);
+	if (strcmp(argv[2],"year")==0) {
+		
+		complYear(atoi(argv[3]),&autoYear);	
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",argv[2],autoYear+1900);	
+	}
 	
 	argc=1;	
 	}
+else if (strcmp(argv[1],"show")==0) {
+	
+	if (strcmp(argv[2],"year")==0) {
+		printf("\n\tParametre '%s' = %d.\n",argv[2],autoYear+1900);	
+	}	
+		
+	argc=1;
+	}		
 else if (strcmp(argv[1],"help")==0) {
 		
-	aide();
+	help();
 	argc=1;
 	}	
 else if (strcmp(argv[1],"exit")==0) {

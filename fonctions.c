@@ -65,24 +65,24 @@ return 0;
 /*
 Définir l'année à utiliser pour l'autocomplétion
 lorsque l'utilisateur n'a pas défini d'année dans la fonction 'calc'
-	userChoice = reçoit le choix de l'utilisateur (soit une année soit 'auto'
+	userChoice = reçoit le choix de l'utilisateur (soit une année soit '0' pour auto)
 	varOption = reçoit la variable à modifier une fois l'année déterminée
 */
 
 int 
-complYear(char *userChoice, int *varOption)
+complYear(int userChoice, int *varOption)
 {
 	time_t currDate = 0;
 	struct tm date = {0};
 	
 	
-	if (strcmp(userChoice,"auto")==0 || userChoice==0) {
+	if (userChoice==0) {
 		time(&currDate);
 		date=*localtime(&currDate);
 		*varOption=date.tm_year;
 	}
-	else if (atoi(userChoice)>=1970 && atoi(userChoice)<=2069) {
-		*varOption=atoi(userChoice)-1900;
+	else if (userChoice>=1970 && userChoice<=2069) {
+		*varOption=userChoice-1900;
 	}
 	else {
 		printf("\n\tL'argument saisie n'est pas valide");
@@ -128,40 +128,37 @@ et le formater pour permettre utilisation dans une autre fonction
 int 
 validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEntree)
 {
-	int decalage[4]={0,0,0,0};
+	int interval[4]={0,0,0,0};
 	char c=0;
 	char tampon[4];
-	size_t i=0, nbSeparateurs=0, longueur=0;
+	size_t i=0, nbInterval=0, longueur=0;
 	
 	for (i=0; i<=strlen(saisie); i++) {
 		c=saisie[i];
 		longueur++;
 		if (c<48 || c>57) {
-			decalage[nbSeparateurs]=(longueur-1);
-			nbSeparateurs++;
+			interval[nbInterval]=(longueur-1);
+			nbInterval++;
 			longueur=0;
 		}
-		else if (nbSeparateurs==4) {
+		else if (nbInterval==3) {
 			printf("\nFormat de date non valide. Format requis : jj.mm.aaaa ou j.m.aa");
 			return 0;
 		}
 	}
 	longueur=0;
-	nbSeparateurs=0;
+	nbInterval=0;
 	for (i=0; i<=strlen(saisie); i++) {
 		tampon[i-longueur]=saisie[i];
-		if (strlen(tampon)==decalage[nbSeparateurs]) {
-			if (nbSeparateurs==0) {
+		if (strlen(tampon)==interval[nbInterval]) {
+			if (nbInterval==0) {
 				date->tm_mday=atoi(tampon);
 			}
-			else if (nbSeparateurs==1) {
+			else if (nbInterval==1) {
 				date->tm_mon=atoi(tampon)-1;
 			}
-			else if (nbSeparateurs==2) {
-				if (decalage[nbSeparateurs]==0) {
-					date->tm_year=autoYear;
-				}
-				else if (decalage[nbSeparateurs]==2) {
+			else if (nbInterval==2) {
+				if (interval[nbInterval]==2) {
 					if (atoi(tampon)<70) {
 						date->tm_year=atoi(tampon)+100;
 					}
@@ -169,16 +166,20 @@ validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEnt
 						date->tm_year=atoi(tampon);
 					}
 				}
-				else {
+				else if (interval[nbInterval]==4) {
 					date->tm_year=atoi(tampon)-1900;
 				}
 			}
 		memset(tampon,0,4);
-		nbSeparateurs++;
+		nbInterval++;
 		i++;
 		longueur=i+1;
 		}
 	}
+	if (interval[2]==0) {
+		date->tm_year=autoYear;
+	}
+
 
 return 0;	
 }
@@ -323,12 +324,13 @@ return tabFeries;
 /*--------------------------------------------------------------------------------------------*/
 
 void 
-aide(void) {
+help(void) {
 	printf("\nRepertoir des commandes disponibles\n");
 	printf("\ncalc\t: calcule le nombre de jours ouvres entre deux dates");
 	printf("\nloc\t: effectue les operations de calcul sur la base de donnees externes");
 	printf("\nedit\t: modifie les listes de feries");
 	printf("\nset\t: modifie certains parametres");
+	printf("\nshow\t: affiche les variables et certaines valeurs");
 	printf("\nhelp\t: affiche l'ensemble des commandes disponibles et leurs arguments");
 	printf("\nexit\t: quitte le programme");
 	printf("\n");
