@@ -16,6 +16,7 @@ struct tm *ptDebut=&debut, *ptFin=&fin;
 
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
+int autoYear=0;
 
 
 do {
@@ -36,12 +37,13 @@ FIN ZONE DE TEST */
 
 //printf("Cmde: %s\tCanton: %s\tDebut: %s\tFin: %s",argv[1], argv[2], argv[3], argv[4]);
 
+
 if (strcmp(argv[1],"calc")==0) {
 	
 	validerEtFormaterFeries(&fichierFeries,argv[2]);
 	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);	
-	validerEtFormaterDate(ptDebut,argv[3],0);
-	validerEtFormaterDate(ptFin,argv[4],0);	
+	validerEtFormaterDate(ptDebut,argv[3],autoYear,0);
+	validerEtFormaterDate(ptFin,argv[4],autoYear,0);	
 	comparerDates(ptDebut,ptFin,tabFeries,tailleTab);
 	argc=1;
 	}
@@ -50,6 +52,12 @@ else if (strcmp(argv[1],"loc")==0) {
 	argc=1;	
 	}
 else if (strcmp(argv[1],"edit")==0) {
+	
+	argc=1;	
+	}
+else if (strcmp(argv[1],"set")==0) {
+	
+	complYear(argv[2],&autoYear);
 	
 	argc=1;	
 	}

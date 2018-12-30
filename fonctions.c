@@ -12,7 +12,8 @@ en ligne de commande et stocker
 les arguments dans des variables
 */
 
-int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
+int 
+recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
 {
 	char c=0;
 	char *tampon=calloc(tailleTampon,sizeof(int));
@@ -62,11 +63,43 @@ return 0;
 /*--------------------------------------------------------------------------------------------*/
 
 /*
+Définir l'année à utiliser pour l'autocomplétion
+lorsque l'utilisateur n'a pas défini d'année dans la fonction 'calc'
+	userChoice = reçoit le choix de l'utilisateur (soit une année soit 'auto'
+	varOption = reçoit la variable à modifier une fois l'année déterminée
+*/
+
+int 
+complYear(char *userChoice, int *varOption)
+{
+	time_t currDate = 0;
+	struct tm date = {0};
+	
+	
+	if (strcmp(userChoice,"auto")==0 || userChoice==0) {
+		time(&currDate);
+		date=*localtime(&currDate);
+		*varOption=date.tm_year;
+	}
+	else if (atoi(userChoice)>=1970 && atoi(userChoice)<=2069) {
+		*varOption=atoi(userChoice)-1900;
+	}
+	else {
+		printf("\n\tL'argument saisie n'est pas valide");
+	}
+	
+	return 0;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+
+/*
 Valider argument "Feries" saisi par l'utilisateur
 et le formater pour permettre ouverture du fichier dans autre fonction
 */
 
-int validerEtFormaterFeries(char **listeFeries, char *canton)
+int 
+validerEtFormaterFeries(char **listeFeries, char *canton)
 {
 	FILE *fichier=NULL;
 	*listeFeries=calloc(7,sizeof(char));
@@ -92,7 +125,8 @@ et le formater pour permettre utilisation dans une autre fonction
 - copier les caractères dans une structure (struct tm)
 */
 
-int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree)
+int 
+validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEntree)
 {
 	int decalage[4]={0,0,0,0};
 	char c=0;
@@ -124,7 +158,20 @@ int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree)
 				date->tm_mon=atoi(tampon)-1;
 			}
 			else if (nbSeparateurs==2) {
-				date->tm_year=atoi(tampon)-1900;
+				if (decalage[nbSeparateurs]==0) {
+					date->tm_year=autoYear;
+				}
+				else if (decalage[nbSeparateurs]==2) {
+					if (atoi(tampon)<70) {
+						date->tm_year=atoi(tampon)+100;
+					}
+					else {
+						date->tm_year=atoi(tampon);
+					}
+				}
+				else {
+					date->tm_year=atoi(tampon)-1900;
+				}
 			}
 		memset(tampon,0,4);
 		nbSeparateurs++;
@@ -145,7 +192,8 @@ si ce n'est pas : un férié, un samedi, un dimanche.
 Elle affiche ensuite le résultat (printf).
 */
 
-int comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int tailleTabFeries)
+int 
+comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int tailleTabFeries)
 {
 	time_t timeStart=0;
 	time_t timeEnd=0;
@@ -186,7 +234,8 @@ printf("\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nb
 /*--------------------------------------------------------------------------------------------*/
 
 
-struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab)
+struct 
+datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab)
 {
 	
 	struct tm date={0};
@@ -273,52 +322,15 @@ return tabFeries;
 
 /*--------------------------------------------------------------------------------------------*/
 
-void aide(void) {
+void 
+aide(void) {
 	printf("\nRepertoir des commandes disponibles\n");
-	printf("\ncalc\t: calcul le nombre de jours ouvres entre deux dates");
+	printf("\ncalc\t: calcule le nombre de jours ouvres entre deux dates");
 	printf("\nloc\t: effectue les operations de calcul sur la base de donnees externes");
 	printf("\nedit\t: modifie les listes de feries");
+	printf("\nset\t: modifie certains parametres");
 	printf("\nhelp\t: affiche l'ensemble des commandes disponibles et leurs arguments");
 	printf("\nexit\t: quitte le programme");
+	printf("\n");
 
 }
-
-
-/*	if (separateurs[0]==1) {
-			*dateValide[0]=0;
-			*dateValide[1]=saisie[0];
-		}
-		else {
-			*dateValide[0]=(char)saisie[0];
-			*dateValide[1]=(char)saisie[1];
-		}
-		*dateValide[2]=".";
-		if (separateurs[1]==1) {
-			*dateValide[3]=0;
-			*dateValide[4]=(char)saisie[separateurs[0]+2];
-		}
-		else {
-			*dateValide[3]=(char)saisie[separateurs[0]+1];
-			*dateValide[4]=(char)saisie[separateurs[0]+2];
-		}
-		*dateValide[5]=".";
-		if (separateurs[2]==0) {
-			*dateValide[6]=2;
-			*dateValide[7]=0;
-			*dateValide[8]=1;
-			*dateValide[9]=8;
-		}
-		else if (separateurs[2]==2) {
-			*dateValide[6]=2;
-			*dateValide[7]=0;
-			*dateValide[8]=(char)saisie[separateurs[0]+separateurs[1]+2];
-			*dateValide[9]=(char)saisie[separateurs[0]+separateurs[1]+3];
-		}
-		else {
-			*dateValide[6]=(char)saisie[separateurs[0]+separateurs[1]+1];
-			*dateValide[7]=(char)saisie[separateurs[0]+separateurs[1]+2];
-			*dateValide[8]=(char)saisie[separateurs[0]+separateurs[1]+3];
-			*dateValide[9]=(char)saisie[separateurs[0]+separateurs[1]+4];
-		}
-		*/
-		

@@ -8,9 +8,11 @@ struct datevent {
 
 int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon);
 
+int complYear(char *userChoice, int *varOption);
+
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 
-int validerEtFormaterDate(struct tm *date, char *saisie, int formatEntree);
+int validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEntree);
 
 struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab);
 
