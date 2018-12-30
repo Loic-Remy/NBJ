@@ -13,16 +13,16 @@ les arguments dans des variables
 */
 
 int 
-recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
+recupererLigneCmde(char ***ptrTabArguments, size_t bufSize)
 {
 	char c=0;
-	char *tampon=calloc(tailleTampon,sizeof(int));
-	char *tampArg=calloc(tailleTampon,sizeof(int));
+	char *tampon=calloc(bufSize,sizeof(int));
+	char *tampArg=calloc(bufSize,sizeof(int));
 	size_t i=0, longTampon=0, nbArguments=1, arg=1, nbCar=0; 
 	char **tabArguments=NULL;
 	
 	printf("\n$ ");
-	fgets(tampon,tailleTampon,stdin);
+	fgets(tampon,bufSize,stdin);
 	
 	longTampon=strlen(tampon);
 	
@@ -50,7 +50,8 @@ recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
 			tampArg[i-nbCar]=tampon[i];
 		}
 	}	
-	free(tampon);
+	freeP(tampon);
+	freeP(tampArg);
 	
 	/* DEBUT ZONE DE TEST
 	for (i=0; i<=nbArguments; i++) {
@@ -59,6 +60,41 @@ recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon)
 	FIN ZONE DE TEST*/
 return 0;
 }
+
+/*--------------------------------------------------------------------------------------------*/
+
+/*
+Libérer un pointeur et lui assigner la valeur NULL
+	pointeur = pointeur à libérer
+*/
+
+void
+freeP (void *pointer) {
+    free(pointer);
+    pointer=NULL;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+
+/*
+Libérer un pointeur de pointeur ainsi que les pointeurs pointés 
+et leur assigner la valeur NULL
+	pPointeur = pointeur de pointeur à libérer
+*/
+
+void 
+freePpChar (char **pPointer) {
+    size_t i=0;
+    for (i=0; i<=sizeof(pPointer)/sizeof(char*); i++) {
+        free(pPointer[i]);
+        pPointer[i]=NULL;
+    }
+free(pPointer);
+pPointer=NULL;
+}
+
+
+
 
 /*--------------------------------------------------------------------------------------------*/
 
@@ -111,7 +147,7 @@ validerEtFormaterFeries(char **listeFeries, char *canton)
 	if(fichier==NULL)
 		{
 		strcpy(*listeFeries,"CH.txt");
-		printf("\nERREUR : Argument [canton] non valide\nCalcul effectue avec la liste par defaut CH");
+		printf("\n\tERREUR : Argument [canton] non valide\nCalcul effectue avec la liste par defaut CH");
 		}
 	fclose(fichier);
 	return 0;
@@ -144,7 +180,7 @@ validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEnt
 			longueur=0;
 		}
 		else if (nbInterval==3) {
-			printf("\nFormat de date non valide. Format requis : jj.mm.aaaa ou j.m.aa");
+			printf("\n\tFormat de date non valide. Format requis : jj.mm.aaaa ou j.m.aa");
 			return 0;
 		}
 	}
@@ -230,7 +266,7 @@ comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int
 	timeCheck=timeCheck+(60*60*24);
 }
 
-printf("\nSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);
+printf("\n\tSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);
 	
 }
 

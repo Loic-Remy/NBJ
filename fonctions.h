@@ -6,7 +6,10 @@ struct datevent {
 	char event[30];
 };
 
-int recupererLigneCmde(char ***ptrTabArguments, size_t tailleTampon);
+int recupererLigneCmde(char ***ptrTabArguments, size_t bufSize);
+
+void freeP (void * pointer);
+void freePpChar (char ** pPointer);
 
 int complYear(int userChoice, int *varOption);
 
