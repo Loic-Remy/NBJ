@@ -16,26 +16,26 @@ int
 recupererLigneCmde(char ***ptrTabArguments, char *buffer, size_t bufSize)
 {
 	char c=0;
-	size_t i=0, longTampon=0, nbArguments=1, arg=1, nbCar=0; 
-	char **tabArguments=NULL;
+	size_t i=0, nbArguments=1, arg=1, nbCar=0; 
 	char *tampArg=calloc(bufSize,sizeof(int));
-		
-	longTampon=strlen(buffer);
 	
-	for(i=0; i<=longTampon; i++) {
+	for(i=0; i<=strlen(buffer); i++) {
 		if (buffer[i]==' ') {
 			nbArguments++;
 		}
 	}	
+
 	
-	tabArguments=calloc(nbArguments,sizeof(char*));
-	*ptrTabArguments=tabArguments;
+	realloc(**ptrTabArguments,nbArguments*sizeof(char*));
 	
-	for(i=0; i<=longTampon; i++) {
+	printf("\nArg 0: %s", *ptrTabArguments[0]);
+	printf("\nArg 1: %s", *ptrTabArguments[1]);
+	
+	for(i=0; i<=strlen(buffer); i++) {
 		if (buffer[i]==' ' || buffer[i]=='\n') {
 			tampArg[i]='\0';
-			tabArguments[arg]=calloc(strlen(tampArg)+1,sizeof(char));
-			strcpy(tabArguments[arg],tampArg);
+			**ptrTabArguments[arg]=calloc(strlen(tampArg)+1,sizeof(char));
+			strcpy((*ptrTabArguments[arg]),tampArg);
 			nbCar=nbCar+strlen(tampArg)+1;
 			memset(tampArg,0,strlen(tampArg));
 			if (arg<nbArguments) {
