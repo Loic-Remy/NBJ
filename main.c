@@ -9,6 +9,7 @@
 int main(int argc, char *argv[]) 
 {
 size_t bufSize=50;
+char buffer[50];
 char *fichierFeries=NULL;
 struct datevent *tabFeries=NULL;
 struct tm debut={0}, fin={0};
@@ -23,7 +24,9 @@ complYear(0,&autoYear);
 do {
 
 if (argc==1) {
-	recupererLigneCmde(&argv,bufSize);
+	printf("\n(%d) $ ",autoYear+1900);
+	fgets(buffer,bufSize,stdin);
+	recupererLigneCmde(&argv,buffer,bufSize);
 	}
 
 /*DEBUT ZONE DE TEST

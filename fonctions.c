@@ -13,21 +13,17 @@ les arguments dans des variables
 */
 
 int 
-recupererLigneCmde(char ***ptrTabArguments, size_t bufSize)
+recupererLigneCmde(char ***ptrTabArguments, char *buffer, size_t bufSize)
 {
 	char c=0;
-	char *tampon=calloc(bufSize,sizeof(int));
-	char *tampArg=calloc(bufSize,sizeof(int));
 	size_t i=0, longTampon=0, nbArguments=1, arg=1, nbCar=0; 
 	char **tabArguments=NULL;
-	
-	printf("\n$ ");
-	fgets(tampon,bufSize,stdin);
-	
-	longTampon=strlen(tampon);
+	char *tampArg=calloc(bufSize,sizeof(int));
+		
+	longTampon=strlen(buffer);
 	
 	for(i=0; i<=longTampon; i++) {
-		if (tampon[i]==' ') {
+		if (buffer[i]==' ') {
 			nbArguments++;
 		}
 	}	
@@ -36,7 +32,7 @@ recupererLigneCmde(char ***ptrTabArguments, size_t bufSize)
 	*ptrTabArguments=tabArguments;
 	
 	for(i=0; i<=longTampon; i++) {
-		if (tampon[i]==' ' || tampon[i]=='\n') {
+		if (buffer[i]==' ' || buffer[i]=='\n') {
 			tampArg[i]='\0';
 			tabArguments[arg]=calloc(strlen(tampArg)+1,sizeof(char));
 			strcpy(tabArguments[arg],tampArg);
@@ -47,10 +43,9 @@ recupererLigneCmde(char ***ptrTabArguments, size_t bufSize)
 			}
 		}		
 		else {		
-			tampArg[i-nbCar]=tampon[i];
+			tampArg[i-nbCar]=buffer[i];
 		}
 	}	
-	freeP(tampon);
 	freeP(tampArg);
 	
 	/* DEBUT ZONE DE TEST
@@ -68,7 +63,7 @@ Libérer un pointeur et lui assigner la valeur NULL
 	pointeur = pointeur à libérer
 */
 
-void
+void 
 freeP (void *pointer) {
     free(pointer);
     pointer=NULL;
@@ -92,9 +87,6 @@ freePpChar (char **pPointer) {
 free(pPointer);
 pPointer=NULL;
 }
-
-
-
 
 /*--------------------------------------------------------------------------------------------*/
 
