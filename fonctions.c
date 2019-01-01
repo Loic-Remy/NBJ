@@ -25,7 +25,7 @@ recupererLigneCmde(char **ptrTabArg, char *buffer, size_t bufSize)
 		}
 	}	
 	
-	*ptrTabArg=realloc(ptrTabArg,nbArguments*sizeof(char*));
+//	ptrTabArg=realloc(ptrTabArg,nbArguments*sizeof(char*));
 
 	for(i=0; i<strlen(buffer); i++) {
 		if (buffer[i]==' ' || buffer[i]=='\n') {
