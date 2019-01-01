@@ -26,7 +26,7 @@ do {
 if (argc==1) {
 	printf("\n(%d) $ ",autoYear+1900);
 	fgets(buffer,bufSize,stdin);
-	recupererLigneCmde(&argv,buffer,bufSize);
+	recupererLigneCmde(argv,buffer,bufSize);
 	}
 
 /*DEBUT ZONE DE TEST

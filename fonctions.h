@@ -6,7 +6,7 @@ struct datevent {
 	char event[30];
 };
 
-int recupererLigneCmde(char ***ptrTabArguments, char *buffer, size_t bufSize);
+int recupererLigneCmde(char **ptrTabArguments, char *buffer, size_t bufSize);
 
 void freeP (void * pointer);
 void freePpChar (char ** pPointer);

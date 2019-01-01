@@ -13,7 +13,7 @@ les arguments dans des variables
 */
 
 int 
-recupererLigneCmde(char ***ptrTabArguments, char *buffer, size_t bufSize)
+recupererLigneCmde(char **ptrTabArguments, char *buffer, size_t bufSize)
 {
 	char c=0;
 	size_t i=0, nbArguments=1, arg=1, nbCar=0; 
@@ -24,18 +24,14 @@ recupererLigneCmde(char ***ptrTabArguments, char *buffer, size_t bufSize)
 			nbArguments++;
 		}
 	}	
+	
+	ptrTabArguments=realloc(ptrTabArguments,nbArguments*sizeof(char*));
 
-	
-	realloc(**ptrTabArguments,nbArguments*sizeof(char*));
-	
-	printf("\nArg 0: %s", *ptrTabArguments[0]);
-	printf("\nArg 1: %s", *ptrTabArguments[1]);
-	
-	for(i=0; i<=strlen(buffer); i++) {
+	for(i=0; i<strlen(buffer); i++) {
 		if (buffer[i]==' ' || buffer[i]=='\n') {
 			tampArg[i]='\0';
-			**ptrTabArguments[arg]=calloc(strlen(tampArg)+1,sizeof(char));
-			strcpy((*ptrTabArguments[arg]),tampArg);
+			ptrTabArguments[arg]=calloc(strlen(tampArg)+1,sizeof(char));
+			strcpy((ptrTabArguments[arg]),tampArg);
 			nbCar=nbCar+strlen(tampArg)+1;
 			memset(tampArg,0,strlen(tampArg));
 			if (arg<nbArguments) {
@@ -46,7 +42,8 @@ recupererLigneCmde(char ***ptrTabArguments, char *buffer, size_t bufSize)
 			tampArg[i-nbCar]=buffer[i];
 		}
 	}	
-	freeP(tampArg);
+	free(tampArg);
+	
 	
 	/* DEBUT ZONE DE TEST
 	for (i=0; i<=nbArguments; i++) {
