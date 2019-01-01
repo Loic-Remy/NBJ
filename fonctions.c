@@ -13,7 +13,7 @@ les arguments dans des variables
 */
 
 int 
-recupererLigneCmde(char **ptrTabArguments, char *buffer, size_t bufSize)
+recupererLigneCmde(char **ptrTabArg, char *buffer, size_t bufSize)
 {
 	char c=0;
 	size_t i=0, nbArguments=1, arg=1, nbCar=0; 
@@ -25,13 +25,13 @@ recupererLigneCmde(char **ptrTabArguments, char *buffer, size_t bufSize)
 		}
 	}	
 	
-	ptrTabArguments=realloc(ptrTabArguments,nbArguments*sizeof(char*));
+	*ptrTabArg=realloc(ptrTabArg,nbArguments*sizeof(char*));
 
 	for(i=0; i<strlen(buffer); i++) {
 		if (buffer[i]==' ' || buffer[i]=='\n') {
 			tampArg[i]='\0';
-			ptrTabArguments[arg]=calloc(strlen(tampArg)+1,sizeof(char));
-			strcpy((ptrTabArguments[arg]),tampArg);
+			ptrTabArg[arg]=calloc(strlen(tampArg)+1,sizeof(char));
+			strcpy((ptrTabArg[arg]),tampArg);
 			nbCar=nbCar+strlen(tampArg)+1;
 			memset(tampArg,0,strlen(tampArg));
 			if (arg<nbArguments) {
