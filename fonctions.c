@@ -7,55 +7,6 @@
 
 
 /*
-Recuperer la saisie utilisateur
-en ligne de commande et stocker 
-les arguments dans des variables
-*/
-
-int 
-recupererLigneCmde(char **ptrTabArg, char *buffer, size_t bufSize)
-{
-	char c=0;
-	size_t i=0, nbArguments=1, arg=1, nbCar=0; 
-	char *tampArg=calloc(bufSize,sizeof(int));
-	
-	for(i=0; i<=strlen(buffer); i++) {
-		if (buffer[i]==' ') {
-			nbArguments++;
-		}
-	}	
-	
-//	ptrTabArg=realloc(ptrTabArg,nbArguments*sizeof(char*));
-
-	for(i=0; i<strlen(buffer); i++) {
-		if (buffer[i]==' ' || buffer[i]=='\n') {
-			tampArg[i]='\0';
-			ptrTabArg[arg]=calloc(strlen(tampArg)+1,sizeof(char));
-			strcpy((ptrTabArg[arg]),tampArg);
-			nbCar=nbCar+strlen(tampArg)+1;
-			memset(tampArg,0,strlen(tampArg));
-			if (arg<nbArguments) {
-				arg++;
-			}
-		}		
-		else {		
-			tampArg[i-nbCar]=buffer[i];
-		}
-	}	
-	free(tampArg);
-	
-	
-	/* DEBUT ZONE DE TEST
-	for (i=0; i<=nbArguments; i++) {
-		printf("\nArgument [%d] : %s",i, tabArguments[i]);
-	}
-	FIN ZONE DE TEST*/
-return 0;
-}
-
-/*--------------------------------------------------------------------------------------------*/
-
-/*
 Libérer un pointeur et lui assigner la valeur NULL
 	pointeur = pointeur à libérer
 */
@@ -257,6 +208,7 @@ comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int
 
 printf("\n\tSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);
 	
+return 0;
 }
 
 /*--------------------------------------------------------------------------------------------*/

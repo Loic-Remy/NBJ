@@ -1,12 +1,9 @@
 
-/* DONE (#1#): Problème avec la structure datevent */
 
 struct datevent {
 	time_t date;
 	char event[30];
 };
-
-int recupererLigneCmde(char **ptrTabArguments, char *buffer, size_t bufSize);
 
 void freeP (void * pointer);
 void freePpChar (char ** pPointer);

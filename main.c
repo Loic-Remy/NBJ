@@ -4,13 +4,17 @@
 #include <string.h>
 #include <time.h>
 #include "fonctions.h"
+#include "cli.h"
+
+#define BUF_SIZE 100
 
 
 int main(int argc, char *argv[]) 
 {
-size_t bufSize=50;
-char buffer[50];
+char buffer[BUF_SIZE];
 char *fichierFeries=NULL;
+char **tabArg=NULL;
+size_t nbArg=1;
 struct datevent *tabFeries=NULL;
 struct tm debut={0}, fin={0};
 struct tm *ptDebut=&debut, *ptFin=&fin;
@@ -23,80 +27,86 @@ complYear(0,&autoYear);
 
 do {
 
-if (argc==1) {
+if (argc==1 && nbArg==1) {
 	printf("\n(%d) $ ",autoYear+1900);
-	fgets(buffer,bufSize,stdin);
-	recupererLigneCmde(argv,buffer,bufSize);
+	CLI_Prompt(buffer,0);
+	CLI_Interpret(buffer,&tabArg,&nbArg);
 	}
+else {
+	tabArg=argv;
+	argv=NULL;
+	nbArg=argc;
+	argc=0;
+}
 
-/*DEBUT ZONE DE TEST
-size_t i=0;
-for (i=0; i<=argc; i++) {
-	printf("\nArgument [%d] : %s",i, argv[i]);
-	}
-
-printf("\n");
-system("PAUSE");
-FIN ZONE DE TEST */
-
-//printf("Cmde: %s\tCanton: %s\tDebut: %s\tFin: %s",argv[1], argv[2], argv[3], argv[4]);
+//	CLI_DisplayTabP(tabArg,nbArg);
 
 
-if (strcmp(argv[1],"calc")==0) {
+if (strcmp(tabArg[1],"calc")==0) {
 	
-	validerEtFormaterFeries(&fichierFeries,argv[2]);
+	validerEtFormaterFeries(&fichierFeries,tabArg[2]);
 	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);	
-	validerEtFormaterDate(ptDebut,argv[3],autoYear,0);
-	validerEtFormaterDate(ptFin,argv[4],autoYear,0);	
+	validerEtFormaterDate(ptDebut,tabArg[3],autoYear,0);
+	validerEtFormaterDate(ptFin,tabArg[4],autoYear,0);	
 	comparerDates(ptDebut,ptFin,tabFeries,tailleTab);
-	argc=1;
-	}
-else if (strcmp(argv[1],"loc")==0) {
 	
-	argc=1;	
+
+	nbArg=1;
 	}
-else if (strcmp(argv[1],"edit")==0) {
+else if (strcmp(tabArg[1],"loc")==0) {
 	
-	argc=1;	
+
+	nbArg=1;	
 	}
-else if (strcmp(argv[1],"set")==0) {
+else if (strcmp(tabArg[1],"edit")==0) {
 	
-	if (strcmp(argv[2],"year")==0) {
+
+	nbArg=1;	
+	}
+else if (strcmp(tabArg[1],"set")==0) {
+	
+	if (strcmp(tabArg[2],"year")==0) {
 		
-		complYear(atoi(argv[3]),&autoYear);	
-		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",argv[2],autoYear+1900);	
+		complYear(atoi(tabArg[3]),&autoYear);	
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],autoYear+1900);	
 	}
 	
-	argc=1;	
+
+	nbArg=1;	
 	}
-else if (strcmp(argv[1],"show")==0) {
+else if (strcmp(tabArg[1],"show")==0) {
 	
-	if (strcmp(argv[2],"year")==0) {
-		printf("\n\tParametre '%s' = %d.\n",argv[2],autoYear+1900);	
+	if (strcmp(tabArg[2],"year")==0) {
+		printf("\n\tParametre '%s' = %d.\n",tabArg[2],autoYear+1900);	
 	}	
-		
-	argc=1;
+
+	
+	nbArg=1;
 	}		
-else if (strcmp(argv[1],"help")==0) {
+else if (strcmp(tabArg[1],"help")==0) {
 		
 	help();
-	argc=1;
+	
+
+	nbArg=1;
 	}	
-else if (strcmp(argv[1],"exit")==0) {
+else if (strcmp(tabArg[1],"exit")==0) {
 		
 	exit(EXIT_SUCCESS);
 	}		
 else {
 		
 	printf("\nCommande inconnue. Tapez la commande 'help' pour obtenir de l'aide.\n");
-	argc=1;
+	
+	
+	nbArg=1;
 	}		
 
 //printf("\n");
 //system("PAUSE");
 
 }
-while (strcmp(argv[1],"exit")!=0);
+while (strcmp(tabArg[1],"exit")!=0);
 
 return 0;
 }
