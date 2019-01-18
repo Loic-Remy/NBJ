@@ -80,14 +80,14 @@ int
 validerEtFormaterFeries(char **listeFeries, char *canton)
 {
 	FILE *fichier=NULL;
-	*listeFeries=calloc(7,sizeof(char));
-	snprintf(*listeFeries,6,"%s.txt",canton);
+	*listeFeries=calloc(15,sizeof(char));
+	snprintf(*listeFeries,14,"data/%s.txt",canton);
 	fichier=fopen(*listeFeries,"r");
 	
 	if(fichier==NULL)
 		{
 		strcpy(*listeFeries,"CH.txt");
-		printf("\n\tERREUR : Argument [canton] non valide\nCalcul effectue avec la liste par defaut CH");
+		printf("\n\tERREUR : Argument [canton] non valide\n Calcul effectue avec la liste par defaut CH");
 		}
 	fclose(fichier);
 	return 0;

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "\inc\cli.h"
+#include "cli.h"
 
 #define BUF_SIZE 100
 
