@@ -5,6 +5,13 @@ struct datevent {
 	char event[30];
 };
 
+struct settings {
+	char language[3]; /*language : en, fr, it...*/
+	char dateType[3]; /*Date system: us, eu,...*/
+	char *pathHoliday; /*Path to holiday directory : /data,...*/
+	int autoYear; /*Defined year for auto-completion : 2016, 2018,...*/
+};
+
 void freeP (void * pointer);
 void freePpChar (char ** pPointer);
 
