@@ -84,7 +84,7 @@ CLI_DisplayTabP(char **tabPointer, size_t nb) {
 	size_t i=0;
 	
 	for (i=0; i<=nb; i++) {
-	printf("\nElement [%lu]: %s",i,tabPointer[i]);
+	printf("\nElement [%d]: %s",i,tabPointer[i]);
 	}
 	
 printf("\n");

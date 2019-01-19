@@ -100,9 +100,13 @@ et le formater pour permettre ouverture du fichier dans autre fonction
 int 
 validerEtFormaterFeries(char **listeFeries, char *path, char *canton)
 {
+	size_t len=strlen(path)+strlen(canton)+5;
 	FILE *fichier=NULL;
-	*listeFeries=calloc(15,sizeof(char));
-	snprintf(*listeFeries,14,"%s%s.txt",path, canton);
+	
+	*listeFeries=malloc(len*sizeof(char));
+	snprintf(*listeFeries,len,"%s%s.txt",path, canton);
+	(*listeFeries)[len-1]='\0';
+	
 	fichier=fopen(*listeFeries,"r");
 	
 	if(fichier==NULL)
