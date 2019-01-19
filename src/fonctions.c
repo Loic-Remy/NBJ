@@ -69,6 +69,22 @@ complYear(int userChoice, int *varOption)
 
 /*--------------------------------------------------------------------------------------------*/
 
+int
+setPath(char* userChoice, char **path)
+{
+	size_t len=strlen(userChoice)+1;
+	
+	*path=malloc(len*sizeof(char));
+	
+	strncpy(*path,userChoice,len);
+	(*path)[len-1]='\0';
+	
+	return 0;
+}
+
+
+/*--------------------------------------------------------------------------------------------*/
+
 /*
 Valider l'argument "Feries" saisi par l'utilisateur
 et le formater pour permettre ouverture du fichier dans autre fonction

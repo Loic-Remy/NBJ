@@ -9,6 +9,7 @@ void freeP (void * pointer);
 void freePpChar (char ** pPointer);
 
 int complYear(int userChoice, int *varOption);
+int setPath(char* userChoice, char **path);
 
 int validerEtFormaterFeries(char **listeFeries, char *canton);
 

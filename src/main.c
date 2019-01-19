@@ -22,7 +22,9 @@ struct tm *ptDebut=&debut, *ptFin=&fin;
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 int autoYear=0;
+char *path=NULL;
 
+setPath("data/",&path);
 complYear(0,&autoYear);
 
 do {
