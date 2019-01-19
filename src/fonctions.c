@@ -83,6 +83,11 @@ setPath(char* userChoice, char **path)
 }
 
 
+
+
+
+
+
 /*--------------------------------------------------------------------------------------------*/
 
 /*
@@ -93,11 +98,11 @@ et le formater pour permettre ouverture du fichier dans autre fonction
 */
 
 int 
-validerEtFormaterFeries(char **listeFeries, char *canton)
+validerEtFormaterFeries(char **listeFeries, char *path, char *canton)
 {
 	FILE *fichier=NULL;
 	*listeFeries=calloc(15,sizeof(char));
-	snprintf(*listeFeries,14,"data/%s.txt",canton);
+	snprintf(*listeFeries,14,"%s%s.txt",path, canton);
 	fichier=fopen(*listeFeries,"r");
 	
 	if(fichier==NULL)

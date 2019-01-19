@@ -15,9 +15,13 @@ char buffer[BUF_SIZE];
 char *fichierFeries=NULL;
 char **tabArg=NULL;
 size_t nbArg=1;
+
 struct datevent *tabFeries=NULL;
 struct tm debut={0}, fin={0};
 struct tm *ptDebut=&debut, *ptFin=&fin;
+
+struct settings settings;
+struct settings *p_settings=&settings;
 
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
@@ -46,7 +50,7 @@ else {
 
 if (strcmp(tabArg[1],"calc")==0) {
 	
-	validerEtFormaterFeries(&fichierFeries,tabArg[2]);
+	validerEtFormaterFeries(&fichierFeries,path,tabArg[2]);
 	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);	
 	validerEtFormaterDate(ptDebut,tabArg[3],autoYear,0);
 	validerEtFormaterDate(ptFin,tabArg[4],autoYear,0);	

@@ -18,7 +18,7 @@ void freePpChar (char ** pPointer);
 int complYear(int userChoice, int *varOption);
 int setPath(char* userChoice, char **path);
 
-int validerEtFormaterFeries(char **listeFeries, char *canton);
+int validerEtFormaterFeries(char **listeFeries, char *path, char *canton);
 
 int validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEntree);
 
