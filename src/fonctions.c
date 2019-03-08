@@ -73,14 +73,10 @@ complYear(int userChoice, int *varOption)
 
 
 int 
-setPath(char* userChoice, char **path)
+setPath(char* userChoice, struct settings *settings)
 {
-	size_t len=strlen(userChoice)+1;
-	
-	*path=malloc(len*sizeof(char));
-	
-	strncpy(*path,userChoice,len);
-	(*path)[len-1]='\0';
+
+	settings->pathHoliday=userChoice;
 	
 	return 0;
 }

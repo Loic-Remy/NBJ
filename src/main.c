@@ -78,6 +78,11 @@ else if (strcmp(tabArg[1],"set")==0) {
 		complYear(atoi(tabArg[3]),&autoYear);	
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],autoYear+1900);	
 	}
+	else if (strcmp(tabArg[2],"path")==0) {
+		
+		setPath(tabArg[3],p_settings);
+		printf("\n\tListe feries se trouvent dans dossier '%s'.\n",tabArg[3]);
+	}
 	
 
 	nbArg=1;	

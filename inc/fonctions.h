@@ -18,7 +18,7 @@ void freePpChar (char ** pPointer);
 int initSettigns(struct settings *settings);
 
 int complYear(int userChoice, int *varOption);
-int setPath(char* userChoice, char **path);
+int setPath(char* userChoice, struct settings *settings);
 
 int validerEtFormaterFeries(char **listeFeries, struct settings *settings, char *canton);
 
