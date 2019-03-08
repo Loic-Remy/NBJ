@@ -1,14 +1,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "cli.h"
+#include "../inc/cli.h"
 
 #define BUF_SIZE 100
+
 
 /*--------------------- F U N C ------------------------------*/
 
 int 
-CLI_Prompt(char buffer[],int option) {
+CLI_Prompt(char *buffer,FILE *stream, int option) {
+	
+	size_t bufLen=0;
 	
 	switch(option) {
 		case 1:
@@ -18,7 +21,8 @@ CLI_Prompt(char buffer[],int option) {
 			break;
 	}
 
-	fgets(buffer,BUF_SIZE,stdin);
+	fgets(buffer,BUF_SIZE,stream);
+
 	
 	return 0;
 }
@@ -57,7 +61,7 @@ CLI_Interpret(char *buffer, char ***tabPointer, size_t *nb)
 			gui*=(-1);
 			pCursor++;
 		}
-		else if (*pCursor==32 && gui==1) {
+	else if (*pCursor==32 && gui==1) {
 			*pCursor='\0';
 			pCursor++;
 			arg++;
@@ -74,22 +78,18 @@ CLI_Interpret(char *buffer, char ***tabPointer, size_t *nb)
 	
 	*nb=arg;
 	
-return 0;	
+return 0;
 }
 
 /*--------------------- F U N C ------------------------------*/
 
 int 
-CLI_DisplayTabP(char **tabPointer, size_t nb) {
+CLI_DisplayArg(char **tabPointer, size_t nb) {
 	size_t i=0;
 	
 	for (i=0; i<=nb; i++) {
-	printf("\nElement [%d]: %s",i,tabPointer[i]);
+	printf("\nElement [%lu]: %s",i,tabPointer[i]);
 	}
-	
-printf("\n");
-system("pause");
-	
 return 0;
 }
 
@@ -101,9 +101,9 @@ CLI_FreePP(char*** tabPointer, size_t nb) {
 	
 	for (i=0; i<=nb; i++) {
 		free((*tabPointer)[i]);
-		(*tabPointer)[i]=NULL;
 		
 	}
+	free(*tabPointer);
 	*tabPointer=NULL;
 	
 	return 0;

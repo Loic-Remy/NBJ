@@ -69,7 +69,10 @@ complYear(int userChoice, int *varOption)
 
 /*--------------------------------------------------------------------------------------------*/
 
-int
+
+
+
+int 
 setPath(char* userChoice, char **path)
 {
 	size_t len=strlen(userChoice)+1;
@@ -82,8 +85,21 @@ setPath(char* userChoice, char **path)
 	return 0;
 }
 
+/*--------------------------------------------------------------------------------------------*/
 
-
+int 
+initSettigns(struct settings *settings)
+{
+	settings->autoYear=0;
+	strncpy(settings->dateType,"eu",3);
+	strncpy(settings->language,"fr",3);
+	
+	settings->pathHoliday=malloc(6*sizeof(char));
+	strncpy(settings->pathHoliday,"data/",5);
+	settings->pathHoliday[6]='0';
+	
+	return 0;
+}
 
 
 
@@ -98,13 +114,13 @@ et le formater pour permettre ouverture du fichier dans autre fonction
 */
 
 int 
-validerEtFormaterFeries(char **listeFeries, char *path, char *canton)
+validerEtFormaterFeries(char **listeFeries, struct settings *settings, char *canton)
 {
-	size_t len=strlen(path)+strlen(canton)+5;
+	size_t len=strlen(settings->pathHoliday)+strlen(canton)+5;
 	FILE *fichier=NULL;
 	
 	*listeFeries=malloc(len*sizeof(char));
-	snprintf(*listeFeries,len,"%s%s.txt",path, canton);
+	snprintf(*listeFeries,len,"%s%s.txt",settings->pathHoliday, canton);
 	(*listeFeries)[len-1]='\0';
 	
 	fichier=fopen(*listeFeries,"r");

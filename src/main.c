@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "fonctions.h"
-#include "cli.h"
+#include "../inc/cli.h"
+#include "../inc/fonctions.h"
+
 
 #define BUF_SIZE 100
 
@@ -12,6 +13,7 @@
 int main(int argc, char *argv[]) 
 {
 char buffer[BUF_SIZE];
+char prompText[11];
 char *fichierFeries=NULL;
 char **tabArg=NULL;
 size_t nbArg=1;
@@ -26,16 +28,16 @@ struct settings *p_settings=&settings;
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 int autoYear=0;
-char *path=NULL;
 
-setPath("data/",&path);
+initSettigns(p_settings);
 complYear(0,&autoYear);
 
 do {
 
 if (argc==1 && nbArg==1) {
-	printf("\n(%d) $ ",autoYear+1900);
-	CLI_Prompt(buffer,0);
+	snprintf(prompText,11,"\n(%d) $ \0",autoYear+1900);
+	
+	CLI_Prompt(prompText,buffer,stdin);
 	CLI_Interpret(buffer,&tabArg,&nbArg);
 	}
 else {
@@ -45,12 +47,12 @@ else {
 	argc=0;
 }
 
-//	CLI_DisplayTabP(tabArg,nbArg);
+	CLI_DisplayArg(tabArg,nbArg);
 
 
 if (strcmp(tabArg[1],"calc")==0) {
 	
-	validerEtFormaterFeries(&fichierFeries,path,tabArg[2]);
+	validerEtFormaterFeries(&fichierFeries,p_settings,tabArg[2]);
 	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);	
 	validerEtFormaterDate(ptDebut,tabArg[3],autoYear,0);
 	validerEtFormaterDate(ptFin,tabArg[4],autoYear,0);	
@@ -112,7 +114,7 @@ else {
 //system("PAUSE");
 
 }
-while (strcmp(tabArg[1],"exit")!=0);
+while (1);
 
 return 0;
 }

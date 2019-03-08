@@ -1,9 +1,27 @@
 
+#ifndef H_CLI_H
+#define H_CLI_H
 
-int CLI_Prompt(char buffer[],int option);
 
-int CLI_Interpret(char *buffer, char ***tabPointer, size_t *nb);
+typedef int CLI_ErrorCode;
 
-int CLI_DisplayTabP(char **tabPointer, size_t nb);
+enum CLI_ErrorCode {
+	CLI_SUCCESS,
+	CLI_MEMORYERROR,
+	CLI_FILEERROR,
+	CLI_MISSENDQUOTE,
+	CLI_ALREADYFREE,
+	CLI_NOCOMMAND
+};
 
-int CLI_FreePP(char*** tabPointer, size_t nb);
+CLI_ErrorCode CLI_Prompt(const char *text, char *buffer, FILE *stream);
+CLI_ErrorCode CLI_Interpret(char *buffer, char ***tabPointer, size_t *nb);
+int CLI_DisplayArg(char **tabPointer, size_t nb);
+CLI_ErrorCode CLI_FreeArg(char*** tabPointer, int nbArg);
+void CLI_DisplayError(CLI_ErrorCode error);
+
+
+
+
+#endif
+
