@@ -16,7 +16,7 @@ char buffer[BUF_SIZE];
 char prompText[11];
 char *fichierFeries=NULL;
 char **tabArg=NULL;
-size_t nbArg=1;
+size_t nbArg=1, i=0;
 
 struct datevent *tabFeries=NULL;
 struct tm debut={0}, fin={0};
@@ -27,7 +27,6 @@ struct settings *p_settings=&settings;
 
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
-int autoYear=0;
 
 initSettigns(p_settings);
 complYear(0,p_settings);
@@ -35,7 +34,7 @@ complYear(0,p_settings);
 do {
 
 if (argc==1 && nbArg==1) {
-	snprintf(prompText,11,"\n(%d) $ \0",autoYear+1900);
+	snprintf(prompText,11,"\n(%d) $ \0",settings.autoYear+1900);
 	
 	CLI_Prompt(prompText,buffer,stdin);
 	CLI_Interpret(buffer,&tabArg,&nbArg);
@@ -47,7 +46,7 @@ else {
 	argc=0;
 }
 
-//	CLI_DisplayArg(tabArg,nbArg);
+	CLI_DisplayArg(tabArg,nbArg);
 
 
 if (strcmp(tabArg[1],"calc")==0) {
@@ -76,7 +75,7 @@ else if (strcmp(tabArg[1],"set")==0) {
 	if (strcmp(tabArg[2],"year")==0) {
 		
 		complYear(atoi(tabArg[3]),p_settings);	
-		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],autoYear+1900);	
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],settings.autoYear+1900);	
 	}
 	else if (strcmp(tabArg[2],"path")==0) {
 		
@@ -90,7 +89,7 @@ else if (strcmp(tabArg[1],"set")==0) {
 else if (strcmp(tabArg[1],"show")==0) {
 	
 	if (strcmp(tabArg[2],"year")==0) {
-		printf("\n\tParametre '%s' = %d.\n",tabArg[2],autoYear+1900);	
+		printf("\n\tParametre '%s' = %d.\n",tabArg[2],settings.autoYear+1900);	
 	}	
 
 	
@@ -113,10 +112,12 @@ else {
 	
 	
 	nbArg=1;
-	}		
+	}
 
-//printf("\n");
-//system("PAUSE");
+	for (i=0; i<=nbArg; i++) {
+//		free(tabArg[i]);
+		tabArg[i]=NULL;
+	}
 
 }
 while (1);
