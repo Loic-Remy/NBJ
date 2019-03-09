@@ -3,40 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "fonctions.h"
+#include "..\inc\fonctions.h"
 
-
-/*
-Libérer un pointeur et lui assigner la valeur NULL
-	pointeur = pointeur à libérer
-*/
-
-void 
-freeP (void *pointer) {
-    free(pointer);
-    pointer=NULL;
-}
-
-/*--------------------------------------------------------------------------------------------*/
-
-/*
-Libérer un pointeur de pointeur ainsi que les pointeurs pointés 
-et leur assigner la valeur NULL
-	pPointeur = pointeur de pointeur à libérer
-*/
-
-void 
-freePpChar (char **pPointer) {
-    size_t i=0;
-    for (i=0; i<=sizeof(pPointer)/sizeof(char*); i++) {
-        free(pPointer[i]);
-        pPointer[i]=NULL;
-    }
-free(pPointer);
-pPointer=NULL;
-}
-
-/*--------------------------------------------------------------------------------------------*/
 
 /*
 Définir l'année à utiliser pour l'autocomplétion de l'année
@@ -46,7 +14,7 @@ lorsque l'utilisateur ne l'a pas définie dans la fonction 'calc'
 */
 
 int 
-complYear(int userChoice, int *varOption)
+complYear(int userChoice, struct settings *settings)
 {
 	time_t currDate = 0;
 	struct tm date = {0};
@@ -55,10 +23,10 @@ complYear(int userChoice, int *varOption)
 	if (userChoice==0) {
 		time(&currDate);
 		date=*localtime(&currDate);
-		*varOption=date.tm_year;
+		settings->autoYear=date.tm_year;
 	}
 	else if (userChoice>=1970 && userChoice<=2069) {
-		*varOption=userChoice-1900;
+		settings->autoYear=userChoice-1900;
 	}
 	else {
 		printf("\n\tL'argument saisie n'est pas valide");
@@ -68,8 +36,6 @@ complYear(int userChoice, int *varOption)
 }
 
 /*--------------------------------------------------------------------------------------------*/
-
-
 
 
 int 
@@ -141,7 +107,7 @@ et le formater pour permettre utilisation dans une autre fonction
 */
 
 int 
-validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEntree)
+validerEtFormaterDate(struct tm *date, char *saisie, struct settings *settings)
 {
 	int interval[4]={0,0,0,0};
 	char c=0;
@@ -192,7 +158,7 @@ validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEnt
 		}
 	}
 	if (interval[2]==0) {
-		date->tm_year=autoYear;
+		date->tm_year=settings->autoYear;
 	}
 
 
@@ -243,7 +209,7 @@ comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int
 	timeCheck=timeCheck+(60*60*24);
 }
 
-printf("\n\tSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",nbSam,nbDim,nbFeries,nbOuvres);
+printf("\n\tSamedi [%d]\tDimanche [%d]\tFeries [%d]\tOuvres [%d]\n",(int)nbSam,(int)nbDim,(int)nbFeries,(int)nbOuvres);
 	
 return 0;
 }

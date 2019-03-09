@@ -30,7 +30,7 @@ int *ptrTailleTab=&tailleTab;
 int autoYear=0;
 
 initSettigns(p_settings);
-complYear(0,&autoYear);
+complYear(0,p_settings);
 
 do {
 
@@ -47,15 +47,15 @@ else {
 	argc=0;
 }
 
-	CLI_DisplayArg(tabArg,nbArg);
+//	CLI_DisplayArg(tabArg,nbArg);
 
 
 if (strcmp(tabArg[1],"calc")==0) {
 	
 	validerEtFormaterFeries(&fichierFeries,p_settings,tabArg[2]);
 	tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);	
-	validerEtFormaterDate(ptDebut,tabArg[3],autoYear,0);
-	validerEtFormaterDate(ptFin,tabArg[4],autoYear,0);	
+	validerEtFormaterDate(ptDebut,tabArg[3],p_settings);
+	validerEtFormaterDate(ptFin,tabArg[4],p_settings);	
 	comparerDates(ptDebut,ptFin,tabFeries,tailleTab);
 	
 
@@ -63,25 +63,25 @@ if (strcmp(tabArg[1],"calc")==0) {
 	}
 else if (strcmp(tabArg[1],"loc")==0) {
 	
-
+	printf("\n rien a afficher");
 	nbArg=1;	
 	}
 else if (strcmp(tabArg[1],"edit")==0) {
 	
-
+	printf("\n rien a afficher");
 	nbArg=1;	
 	}
 else if (strcmp(tabArg[1],"set")==0) {
 	
 	if (strcmp(tabArg[2],"year")==0) {
 		
-		complYear(atoi(tabArg[3]),&autoYear);	
+		complYear(atoi(tabArg[3]),p_settings);	
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],autoYear+1900);	
 	}
 	else if (strcmp(tabArg[2],"path")==0) {
 		
 		setPath(tabArg[3],p_settings);
-		printf("\n\tListe feries se trouvent dans dossier '%s'.\n",tabArg[3]);
+		printf("\n\tListe feries se trouvent dans le dossier '%s'.\n",tabArg[3]);
 	}
 	
 

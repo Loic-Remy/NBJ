@@ -17,12 +17,12 @@ void freePpChar (char ** pPointer);
 
 int initSettigns(struct settings *settings);
 
-int complYear(int userChoice, int *varOption);
+int complYear(int userChoice, struct settings *settings);
 int setPath(char* userChoice, struct settings *settings);
 
 int validerEtFormaterFeries(char **listeFeries, struct settings *settings, char *canton);
 
-int validerEtFormaterDate(struct tm *date, char *saisie, int autoYear, int formatEntree);
+int validerEtFormaterDate(struct tm *date, char *saisie, struct settings *settings);
 
 struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab);
 
