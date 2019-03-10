@@ -41,24 +41,27 @@ complYear(int userChoice, struct settings *settings)
 int 
 setPath(char* userChoice, struct settings *settings)
 {
-
-	settings->pathHoliday=userChoice;
+	size_t pathLen=0;
+	pathLen=strlen(userChoice);
 	
+	settings->pathHoliday=malloc(pathLen*sizeof(char));
+	settings->pathHoliday=userChoice;
+		
 	return 0;
 }
 
 /*--------------------------------------------------------------------------------------------*/
 
 int 
-initSettigns(struct settings *settings)
+initSettings(struct settings *settings)
 {
-	settings->autoYear=0;
-	strncpy(settings->dateType,"eu",3);
-	strncpy(settings->language,"fr",3);
+	complYear(0,settings);
 	
-	settings->pathHoliday=malloc(6*sizeof(char));
-	strncpy(settings->pathHoliday,"data/",5);
-	settings->pathHoliday[6]='0';
+	strncpy(settings->dateType,"eu",2);
+	
+	strncpy(settings->language,"fr",2);
+	
+	setPath("data/",settings);
 	
 	return 0;
 }

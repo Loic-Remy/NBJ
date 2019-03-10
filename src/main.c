@@ -28,8 +28,7 @@ struct settings *p_settings=&settings;
 int tailleTab=0;
 int *ptrTailleTab=&tailleTab;
 
-initSettigns(p_settings);
-complYear(0,p_settings);
+initSettings(p_settings);
 
 do {
 

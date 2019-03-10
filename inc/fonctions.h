@@ -15,7 +15,7 @@ struct settings {
 void freeP (void * pointer);
 void freePpChar (char ** pPointer);
 
-int initSettigns(struct settings *settings);
+int initSettings(struct settings *settings);
 
 int complYear(int userChoice, struct settings *settings);
 int setPath(char* userChoice, struct settings *settings);
