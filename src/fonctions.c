@@ -175,7 +175,7 @@ Elle affiche ensuite le résultat (printf).
 */
 
 int 
-comparerDates(struct tm *debut, struct tm *fin, struct datevent * tabFeries, int tailleTabFeries)
+comparerDates(struct tm *debut, struct tm *fin, struct datevent *tabFeries, int tailleTabFeries)
 {
 	time_t timeStart=0;
 	time_t timeEnd=0;

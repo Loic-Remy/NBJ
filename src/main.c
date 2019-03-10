@@ -46,7 +46,7 @@ else {
 	argc=0;
 }
 
-	CLI_DisplayArg(tabArg,nbArg);
+//	CLI_DisplayArg(tabArg,nbArg);
 
 
 if (strcmp(tabArg[1],"calc")==0) {
@@ -58,17 +58,17 @@ if (strcmp(tabArg[1],"calc")==0) {
 	comparerDates(ptDebut,ptFin,tabFeries,tailleTab);
 	
 
-	nbArg=1;
+
 	}
 else if (strcmp(tabArg[1],"loc")==0) {
 	
 	printf("\n rien a afficher");
-	nbArg=1;	
+	
 	}
 else if (strcmp(tabArg[1],"edit")==0) {
 	
 	printf("\n rien a afficher");
-	nbArg=1;	
+
 	}
 else if (strcmp(tabArg[1],"set")==0) {
 	
@@ -84,7 +84,7 @@ else if (strcmp(tabArg[1],"set")==0) {
 	}
 	
 
-	nbArg=1;	
+	
 	}
 else if (strcmp(tabArg[1],"show")==0) {
 	
@@ -93,14 +93,14 @@ else if (strcmp(tabArg[1],"show")==0) {
 	}	
 
 	
-	nbArg=1;
+
 	}		
 else if (strcmp(tabArg[1],"help")==0) {
 		
 	help();
 	
 
-	nbArg=1;
+
 	}	
 else if (strcmp(tabArg[1],"exit")==0) {
 		
@@ -111,14 +111,14 @@ else {
 	printf("\nCommande inconnue. Tapez la commande 'help' pour obtenir de l'aide.\n");
 	
 	
-	nbArg=1;
+
 	}
 
 	for (i=0; i<=nbArg; i++) {
 //		free(tabArg[i]);
 		tabArg[i]=NULL;
 	}
-
+	nbArg=1;
 }
 while (1);
 
