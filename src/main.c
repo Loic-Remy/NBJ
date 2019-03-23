@@ -41,8 +41,8 @@ if (argc==1) {
 else {
 	tabArg=argv;
 	argv=NULL;
-	nbArg=argc;
-	argc=0;
+	nbArg=argc-1;
+	argc=1;
 }
 
 //	CLI_DisplayArg(tabArg,nbArg);
