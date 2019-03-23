@@ -16,7 +16,7 @@ char buffer[BUF_SIZE];
 char prompText[11];
 char *fichierFeries=NULL;
 char **tabArg=NULL;
-size_t nbArg=1, i=0;
+size_t nbArg=0, i=0;
 
 struct datevent *tabFeries=NULL;
 struct tm debut={0}, fin={0};
@@ -32,7 +32,7 @@ initSettings(p_settings);
 
 do {
 
-if (argc==1 && nbArg==1) {
+if (argc==1) {
 	snprintf(prompText,11,"\n(%d) $ \0",settings.autoYear+1900);
 	
 	CLI_Prompt(prompText,buffer,stdin);

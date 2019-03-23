@@ -14,13 +14,14 @@ enum CLI_ErrorCode {
 	CLI_NOCOMMAND
 };
 
-CLI_ErrorCode CLI_Prompt(const char *text, char *buffer, FILE *stream);
+CLI_ErrorCode CLI_Prompt(const char *str, char *buffer, FILE *stream);
 CLI_ErrorCode CLI_Interpret(char *buffer, char ***tabPointer, size_t *nb);
 int CLI_DisplayArg(char **tabPointer, size_t nb);
-CLI_ErrorCode CLI_FreeArg(char*** tabPointer, int nbArg);
+CLI_ErrorCode CLI_FreeArg(char** tabPointer, size_t *nbArg);
 void CLI_DisplayError(CLI_ErrorCode error);
 
-
+size_t CLI_shapeCmdLine(char *cmdLine);
+char **CLI_parseCmdLine(char *cmdLine, size_t nbArg);
 
 
 #endif
