@@ -76,7 +76,7 @@ else if (strcmp(tabArg[1],"set")==0) {
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
 	}
 	else if (strcmp(tabArg[2],"lang")==0) {
-		strncpy(settings.lang,tabArg[3],2);
+		settings.lang=setParam(tabArg[3]);
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
 	}
 	else if (strcmp(tabArg[2],"pathToHoliday")==0) {	
@@ -84,7 +84,7 @@ else if (strcmp(tabArg[1],"set")==0) {
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
 	}	
 	else if (strcmp(tabArg[2],"defaultHoliday")==0) {
-		strncpy(settings.defaultHoliday,tabArg[3],2);
+		settings.defaultHoliday=setParam(tabArg[3]);
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
 	}	
 	else if (strcmp(tabArg[2],"autoYear")==0) {	
@@ -92,8 +92,11 @@ else if (strcmp(tabArg[1],"set")==0) {
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],settings.autoYear+1900);	
 	}
 	else if (strcmp(tabArg[2],"dateType")==0) {
-		strncpy(settings.dateType,tabArg[3],2);
+		settings.dateType=setParam(tabArg[3]);
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);			
+	}
+	else {
+		printf("\n\tArguments non valides. Veuillez saisir a nouveau la commande\n");
 	}
 
 	}
@@ -120,7 +123,9 @@ else if (strcmp(tabArg[1],"show")==0) {
 	else if (strcmp(tabArg[2],"settings")==0) {
 		showSettings(p_settings);
 	}
-	
+	else {
+		printf("\n\tArguments non valides. Veuillez saisir a nouveau la commande\n");
+	}
 
 	}		
 else if (strcmp(tabArg[1],"help")==0) {
@@ -136,7 +141,7 @@ else if (strcmp(tabArg[1],"exit")==0) {
 	}		
 else {
 		
-	printf("\nCommande inconnue. Tapez la commande 'help' pour obtenir de l'aide.\n");
+	printf("\n\tCommande inconnue. Tapez la commande 'help' pour obtenir de l'aide.\n");
 	
 	
 

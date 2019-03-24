@@ -71,15 +71,38 @@ setPath(char* userChoice)
 }
 
 /*--------------------------------------------------------------------------------------------*/
+/*
+DESCRIPTION
+
+	
+INPUTS
+
+
+OUTPUT
+
+*/
+
+char*
+setParam(char* userChoice) 
+{
+	char* param=NULL;
+	size_t len=strlen(userChoice)+1;
+	
+	param=calloc(len,sizeof(char));
+	strncpy(param,userChoice,len);
+	return param;
+}
+
+/*--------------------------------------------------------------------------------------------*/
 
 int 
 initSettings(struct settings *settings)
 {
 	settings->pathToLang=setPath("data\\lang");
-	strncpy(settings->lang,"fr",2);
+	settings->lang=setParam("fr");
 	settings->pathToHoliday=setPath("data\\holiday");
-	strncpy(settings->defaultHoliday,"CH",2);	
-	strncpy(settings->dateType,"eu",2);
+	settings->defaultHoliday=setParam("CH");	
+	settings->dateType=setParam("eu");
 	complYear(0,settings);
 
 	return 0;
