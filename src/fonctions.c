@@ -319,48 +319,47 @@ datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab)
 		compteurLigne=1;
 		rewind(fichier);
 							
-		while(fgets(tamponLigne,40,fichier)!=NULL) {
+	while(fgets(tamponLigne,40,fichier)!=NULL) {
 			
 		for (i=0; i<=39; i++) {
-		if (i<2) {
-			tamponSaisie[i]=tamponLigne[i];
+			if (i<2) {
+				tamponSaisie[i]=tamponLigne[i];
+			}
+			else if (i==2) {
+				date.tm_mday=atoi(tamponSaisie);
+				memset(tamponSaisie,0,30);
+			}
+			else if (i>2 &&i<5) {
+				tamponSaisie[i-3]=tamponLigne[i];
+			}
+			else if (i==5) {
+				date.tm_mon=atoi(tamponSaisie)-1;
+				memset(tamponSaisie,0,30);
+			}
+			else if (i>5 && i<10) {
+				tamponSaisie[i-6]=tamponLigne[i];
+			}
+			else if (i==10) {
+				date.tm_year=atoi(tamponSaisie)-1900;
+				memset(tamponSaisie,0,30);
+				date.tm_hour=0;
+				date.tm_min=0;
+				date.tm_sec=0;
+				date.tm_isdst=0;
+				dateSec=mktime(&date);
+				tabFeries[n].date=dateSec;
+			}
+			else if (i>10 && i<39) {
+				tamponSaisie[i-11]=tamponLigne[i];
+			}
+			else if (i==39){
+				strncpy(tabFeries[n].event,tamponSaisie,strlen(tamponSaisie));
+				tabFeries[n].event[strlen(tamponSaisie)-1]='\0';
+				memset(tamponSaisie,0,30);
+				n++;	
+			}
 		}
-		else if (i==2) {
-			date.tm_mday=atoi(tamponSaisie);
-			memset(tamponSaisie,0,30);
-		}
-		else if (i>2 &&i<5) {
-			tamponSaisie[i-3]=tamponLigne[i];
-		}
-		else if (i==5) {
-			date.tm_mon=atoi(tamponSaisie)-1;
-			memset(tamponSaisie,0,30);
-		}
-		else if (i>5 && i<10) {
-			tamponSaisie[i-6]=tamponLigne[i];
-		}
-		else if (i==10) {
-			date.tm_year=atoi(tamponSaisie)-1900;
-			memset(tamponSaisie,0,30);
-			date.tm_hour=0;
-			date.tm_min=0;
-			date.tm_sec=0;
-			date.tm_isdst=0;
-			dateSec=mktime(&date);
-			tabFeries[n].date=dateSec;
-		}
-		else if (i>10 && i<39) {
-			tamponSaisie[i-11]=tamponLigne[i];
-		}
-		else if (i==39){
-			strncpy(tabFeries[n].event,tamponSaisie,strlen(tamponSaisie));
-			memset(tamponSaisie,0,30);
-			n++;
-			
-		
-		}
-		}
-		}
+	}
 	}	
 
 free(*fichierFeries);
@@ -387,17 +386,17 @@ showHoliday(struct settings *settings, struct datevent *arHoliday, int arrSize, 
 		year=atoi(yearChoice)-1900;
 	}
 
-	printf("\n");
-	
+
 	for (i=0; i<arrSize; i++) {
 			pStructDate=localtime(&arHoliday[i].date);
 			
 			if(pStructDate->tm_year==year) {
 				strftime(date,12,"%d.%m.%Y",pStructDate);
-				printf("\t%s : %s", date, arHoliday[i].event);
+				printf("\n\t%s : %s", date, arHoliday[i].event);
 				j++;			
 			}
 		}
+	printf("\n");
 	if(j==0)
 		printf("\tNo holiday registred for this year.\n");
 
