@@ -92,9 +92,28 @@ else if (strcmp(tabArg[1],"set")==0) {
 	}
 else if (strcmp(tabArg[1],"show")==0) {
 	
-	if (strcmp(tabArg[2],"year")==0) {
-		printf("\n\tParametre '%s' = %d.\n",tabArg[2],settings.autoYear+1900);	
+	if (strcmp(tabArg[2],"pathTolang")==0) {
+		printf("\n\t%s : %s\n",tabArg[2],settings.pathToLang);	
 	}	
+	else if (strcmp(tabArg[2],"pathToHoliday")==0) {
+		printf("\n\t%s : %s\n",tabArg[2],settings.pathToHoliday);	
+	}	
+	else if (strcmp(tabArg[2],"lang")==0) {
+		printf("\n\t%s : %s\n",tabArg[2],settings.language);	
+	}		
+	else if (strcmp(tabArg[2],"defaultHoliday")==0) {
+		printf("\n\t%s : %s\n",tabArg[2],settings.defaultHoliday);	
+	}	
+	else if (strcmp(tabArg[2],"dateType")==0) {
+		printf("\n\t%s : %s\n",tabArg[2],settings.dateType);	
+	}	
+	else if (strcmp(tabArg[2],"autoYear")==0) {
+		printf("\n\t%s : %d\n",tabArg[2],settings.autoYear+1900);	
+	}
+
+	
+	
+		
 	else if (strcmp(tabArg[2],"settings")==0) {
 		showSettings(p_settings);
 	}
