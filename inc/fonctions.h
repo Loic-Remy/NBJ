@@ -7,10 +7,10 @@ struct datevent {
 
 struct settings {
 	char *pathToLang;
-	char language[3]; /*language : en, fr, it...*/
-	char dateType[3]; /*Date system: us, eu,...*/
+	char lang[3]; /*lang : en, fr, it...*/
 	char *pathToHoliday; /*Path to holiday directory : /data,...*/
 	char defaultHoliday[3];
+	char dateType[3]; /*Date system: us, eu,...*/
 	int autoYear; /*Defined year for auto-completion : 2016, 2018,...*/
 };
 

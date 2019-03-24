@@ -75,18 +75,13 @@ setPath(char* userChoice)
 int 
 initSettings(struct settings *settings)
 {
-	complYear(0,settings);
-	
-	
-	strncpy(settings->defaultHoliday,"CH",2);
-	
-	strncpy(settings->dateType,"eu",2);
-	
-	strncpy(settings->language,"fr",2);
-	
-	settings->pathToHoliday=setPath("data\\holiday");
 	settings->pathToLang=setPath("data\\lang");
-	
+	strncpy(settings->lang,"fr",2);
+	settings->pathToHoliday=setPath("data\\holiday");
+	strncpy(settings->defaultHoliday,"CH",2);	
+	strncpy(settings->dateType,"eu",2);
+	complYear(0,settings);
+
 	return 0;
 }
 
@@ -95,12 +90,12 @@ initSettings(struct settings *settings)
 int
 showSettings(struct settings *settings)
 {
-	printf("\tlang\t\t: %s\n",settings->language);
+	printf("\tlang\t\t: %s\n",settings->lang);
 	printf("\tpathToLang\t: %s\n", settings->pathToLang);
-	printf("\tdateType\t: %s\n",settings->dateType);
-	printf("\tautoYear\t: %d\n",settings->autoYear+1900);
 	printf("\tpathToHoliday\t: %s\n", settings->pathToHoliday);
 	printf("\tdefaultHoliday\t: %s\n",settings->defaultHoliday);
+	printf("\tdateType\t: %s\n",settings->dateType);
+	printf("\tautoYear\t: %d\n",settings->autoYear+1900);
 
 return 0;
 }

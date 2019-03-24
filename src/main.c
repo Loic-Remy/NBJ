@@ -71,36 +71,43 @@ else if (strcmp(tabArg[1],"edit")==0) {
 	}
 else if (strcmp(tabArg[1],"set")==0) {
 	
-	if (strcmp(tabArg[2],"year")==0) {
-		
+	if (strcmp(tabArg[2],"pathToLang")==0) {
+		settings.pathToLang=setPath(tabArg[3]);
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
+	}
+	else if (strcmp(tabArg[2],"lang")==0) {
+		strncpy(settings.lang,tabArg[3],2);
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
+	}
+	else if (strcmp(tabArg[2],"pathToHoliday")==0) {	
+		settings.pathToHoliday=setPath(tabArg[3]);
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
+	}	
+	else if (strcmp(tabArg[2],"defaultHoliday")==0) {
+		strncpy(settings.defaultHoliday,tabArg[3],2);
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);
+	}	
+	else if (strcmp(tabArg[2],"autoYear")==0) {	
 		complYear(atoi(tabArg[3]),p_settings);	
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],settings.autoYear+1900);	
 	}
-	else if (strcmp(tabArg[2],"pathToHoliday")==0) {
-		
-		settings.pathToHoliday=setPath(tabArg[3]);
-		printf("\n\tListe feries se trouvent dans le dossier '%s'.\n",tabArg[3]);
+	else if (strcmp(tabArg[2],"dateType")==0) {
+		strncpy(settings.dateType,tabArg[3],2);
+		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);			
 	}
-	else if (strcmp(tabArg[2],"pathToLang")==0) {
-		
-		settings.pathToLang=setPath(tabArg[3]);
-		printf("\n\tLes textes se trouvent dans le dossier '%s'.\n",tabArg[3]);
-	}
-	
 
-	
 	}
 else if (strcmp(tabArg[1],"show")==0) {
 	
 	if (strcmp(tabArg[2],"pathTolang")==0) {
 		printf("\n\t%s : %s\n",tabArg[2],settings.pathToLang);	
 	}	
+	else if (strcmp(tabArg[2],"lang")==0) {
+		printf("\n\t%s : %s\n",tabArg[2],settings.lang);	
+	}		
 	else if (strcmp(tabArg[2],"pathToHoliday")==0) {
 		printf("\n\t%s : %s\n",tabArg[2],settings.pathToHoliday);	
 	}	
-	else if (strcmp(tabArg[2],"lang")==0) {
-		printf("\n\t%s : %s\n",tabArg[2],settings.language);	
-	}		
 	else if (strcmp(tabArg[2],"defaultHoliday")==0) {
 		printf("\n\t%s : %s\n",tabArg[2],settings.defaultHoliday);	
 	}	
@@ -109,11 +116,7 @@ else if (strcmp(tabArg[1],"show")==0) {
 	}	
 	else if (strcmp(tabArg[2],"autoYear")==0) {
 		printf("\n\t%s : %d\n",tabArg[2],settings.autoYear+1900);	
-	}
-
-	
-	
-		
+	}	
 	else if (strcmp(tabArg[2],"settings")==0) {
 		showSettings(p_settings);
 	}
