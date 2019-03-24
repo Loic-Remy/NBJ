@@ -6,9 +6,11 @@ struct datevent {
 };
 
 struct settings {
+	char *pathToLang;
 	char language[3]; /*language : en, fr, it...*/
 	char dateType[3]; /*Date system: us, eu,...*/
-	char *pathHoliday; /*Path to holiday directory : /data,...*/
+	char *pathToHoliday; /*Path to holiday directory : /data,...*/
+	char defaultHoliday[3];
 	int autoYear; /*Defined year for auto-completion : 2016, 2018,...*/
 };
 
@@ -18,7 +20,7 @@ void freePpChar (char ** pPointer);
 int initSettings(struct settings *settings);
 
 int complYear(int userChoice, struct settings *settings);
-int setPath(char* userChoice, struct settings *settings);
+char * setPathToHoliday(char* userChoice);
 
 int validerEtFormaterFeries(char **listeFeries, struct settings *settings, char *canton);
 

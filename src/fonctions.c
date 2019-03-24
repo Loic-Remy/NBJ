@@ -36,18 +36,38 @@ complYear(int userChoice, struct settings *settings)
 }
 
 /*--------------------------------------------------------------------------------------------*/
-
-
-int 
-setPath(char* userChoice, struct settings *settings)
-{
-	size_t pathLen=0;
-	pathLen=strlen(userChoice);
+/*
+DESCRIPTION
+	The function formats the str input from user and return a pointer to this string as a path
+	to the directory containing the holiday's files.
 	
-	settings->pathHoliday=malloc(pathLen*sizeof(char));
-	settings->pathHoliday=userChoice;
+INPUTS
+	userChoice	= string with the path to the directory containing the file with holidays
+
+OUTPUT
+	The functions return a pointer to char to the path to holidays directory
+*/
+
+char* 
+setPathToHoliday(char* userChoice)
+{
+	char *path=NULL;
+	char *lastChar=NULL;
+	size_t pathLen=0;
+	
+	lastChar=&userChoice[strlen(userChoice)];
+	
+	pathLen=strlen(userChoice)+2;
+	path=calloc(pathLen,sizeof(char));
+	
+	if(*lastChar!='\\') {
+		snprintf(path,pathLen,"%s\\",userChoice);
+	}
+	else {
+		snprintf(path,pathLen,"%s",userChoice);
+	}
 		
-	return 0;
+	return path;
 }
 
 /*--------------------------------------------------------------------------------------------*/
@@ -61,7 +81,7 @@ initSettings(struct settings *settings)
 	
 	strncpy(settings->language,"fr",2);
 	
-	setPath("data/",settings);
+	settings->pathToHoliday=setPathToHoliday("data\\");
 	
 	return 0;
 }
@@ -81,11 +101,11 @@ et le formater pour permettre ouverture du fichier dans autre fonction
 int 
 validerEtFormaterFeries(char **listeFeries, struct settings *settings, char *canton)
 {
-	size_t len=strlen(settings->pathHoliday)+strlen(canton)+5;
+	size_t len=strlen(settings->pathToHoliday)+strlen(canton)+5;
 	FILE *fichier=NULL;
 	
 	*listeFeries=malloc(len*sizeof(char));
-	snprintf(*listeFeries,len,"%s%s.txt",settings->pathHoliday, canton);
+	snprintf(*listeFeries,len,"%s%s.txt",settings->pathToHoliday, canton);
 	(*listeFeries)[len-1]='\0';
 	
 	fichier=fopen(*listeFeries,"r");

@@ -78,7 +78,7 @@ else if (strcmp(tabArg[1],"set")==0) {
 	}
 	else if (strcmp(tabArg[2],"path")==0) {
 		
-		setPath(tabArg[3],p_settings);
+		settings.pathToHoliday=setPathToHoliday(tabArg[3]);
 		printf("\n\tListe feries se trouvent dans le dossier '%s'.\n",tabArg[3]);
 	}
 	
