@@ -368,6 +368,42 @@ fclose(fichier);
 return tabFeries;
 }
 
+/*--------------------------------------------------------------------------------------------*/
+
+
+size_t
+showHoliday(struct settings *settings, struct datevent *arHoliday, int arrSize, char *yearChoice) 
+{
+	size_t i=0, j=0;
+	int year=0;
+	char date[12]={0};
+	struct tm structDate;
+	struct tm *pStructDate=&structDate;
+	
+	if (yearChoice==NULL) {
+		year=settings->autoYear;
+	}
+	else {
+		year=atoi(yearChoice)-1900;
+	}
+
+	printf("\n");
+	
+	for (i=0; i<arrSize; i++) {
+			pStructDate=localtime(&arHoliday[i].date);
+			
+			if(pStructDate->tm_year==year) {
+				strftime(date,12,"%d.%m.%Y",pStructDate);
+				printf("\t%s : %s", date, arHoliday[i].event);
+				j++;			
+			}
+		}
+	if(j==0)
+		printf("\tNo holiday registred for this year.\n");
+
+	
+	return j;
+}
 
 
 /*--------------------------------------------------------------------------------------------*/

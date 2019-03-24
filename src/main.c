@@ -123,6 +123,13 @@ else if (strcmp(tabArg[1],"show")==0) {
 	else if (strcmp(tabArg[2],"settings")==0) {
 		showSettings(p_settings);
 	}
+	else if (strcmp(tabArg[2],"holiday")==0) {
+		validerEtFormaterFeries(&fichierFeries,p_settings,tabArg[3]);
+		tabFeries=chargerListeFeries(&fichierFeries,ptrTailleTab);	
+		showHoliday(p_settings,tabFeries,tailleTab,tabArg[4]);
+	}
+	
+	
 	else {
 		printf("\n\tArguments de '%s' non valides. Veuillez saisir a nouveau la commande\n",tabArg[1]);
 	}

@@ -34,6 +34,6 @@ struct datevent *chargerListeFeries(char **fichierFeries, int *ptrTailleTab);
 
 int comparerDates(struct tm *debut, struct tm *fin, struct datevent tabFeries[], int tailleTabFeries);
 
-
+size_t showHoliday(struct settings *settings, struct datevent *arHoliday, int arrSize, char *yearChoice);
 
 void help(void);
