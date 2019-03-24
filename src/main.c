@@ -76,10 +76,15 @@ else if (strcmp(tabArg[1],"set")==0) {
 		complYear(atoi(tabArg[3]),p_settings);	
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %d.\n",tabArg[2],settings.autoYear+1900);	
 	}
-	else if (strcmp(tabArg[2],"path")==0) {
+	else if (strcmp(tabArg[2],"pathToHoliday")==0) {
 		
-		settings.pathToHoliday=setPathToHoliday(tabArg[3]);
+		settings.pathToHoliday=setPath(tabArg[3]);
 		printf("\n\tListe feries se trouvent dans le dossier '%s'.\n",tabArg[3]);
+	}
+	else if (strcmp(tabArg[2],"pathToLang")==0) {
+		
+		settings.pathToLang=setPath(tabArg[3]);
+		printf("\n\tLes textes se trouvent dans le dossier '%s'.\n",tabArg[3]);
 	}
 	
 
@@ -90,7 +95,9 @@ else if (strcmp(tabArg[1],"show")==0) {
 	if (strcmp(tabArg[2],"year")==0) {
 		printf("\n\tParametre '%s' = %d.\n",tabArg[2],settings.autoYear+1900);	
 	}	
-
+	else if (strcmp(tabArg[2],"settings")==0) {
+		showSettings(p_settings);
+	}
 	
 
 	}		

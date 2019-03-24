@@ -49,7 +49,7 @@ OUTPUT
 */
 
 char* 
-setPathToHoliday(char* userChoice)
+setPath(char* userChoice)
 {
 	char *path=NULL;
 	char *lastChar=NULL;
@@ -77,13 +77,32 @@ initSettings(struct settings *settings)
 {
 	complYear(0,settings);
 	
+	
+	strncpy(settings->defaultHoliday,"CH",2);
+	
 	strncpy(settings->dateType,"eu",2);
 	
 	strncpy(settings->language,"fr",2);
 	
-	settings->pathToHoliday=setPathToHoliday("data\\");
+	settings->pathToHoliday=setPath("data\\holiday");
+	settings->pathToLang=setPath("data\\lang");
 	
 	return 0;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+
+int
+showSettings(struct settings *settings)
+{
+	printf("\tlang\t\t: %s\n",settings->language);
+	printf("\tpathToLang\t: %s\n", settings->pathToLang);
+	printf("\tdateType\t: %s\n",settings->dateType);
+	printf("\tautoYear\t: %d\n",settings->autoYear+1900);
+	printf("\tpathToHoliday\t: %s\n", settings->pathToHoliday);
+	printf("\tdefaultHoliday\t: %s\n",settings->defaultHoliday);
+
+return 0;
 }
 
 
@@ -92,10 +111,17 @@ initSettings(struct settings *settings)
 /*--------------------------------------------------------------------------------------------*/
 
 /*
-Valider l'argument "Feries" saisi par l'utilisateur
-et le formater pour permettre ouverture du fichier dans autre fonction
-	listeFeries = indique le pointeur qui recevra la liste de date à exclure
-	canton = liste de feries à utilisée, saisi par l'utilisateur
+DESCRIPTION
+	Valider l'argument "Feries" saisi par l'utilisateur et le formater pour permettre l'ouverture
+	du fichier dans autre fonction
+	
+INPUTS
+	listeFeries	= indique le pointeur qui recevra la liste de date à exclure
+	canton		= liste de feries à utilisée, saisi par l'utilisateur
+	
+OUPUT
+
+
 */
 
 int 

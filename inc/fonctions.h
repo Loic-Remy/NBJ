@@ -19,8 +19,11 @@ void freePpChar (char ** pPointer);
 
 int initSettings(struct settings *settings);
 
+int showSettings(struct settings *settings);
+
+
 int complYear(int userChoice, struct settings *settings);
-char * setPathToHoliday(char* userChoice);
+char * setPath(char* userChoice);
 
 int validerEtFormaterFeries(char **listeFeries, struct settings *settings, char *canton);
 
