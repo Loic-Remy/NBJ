@@ -96,7 +96,7 @@ else if (strcmp(tabArg[1],"set")==0) {
 		printf("\n\tParametre '%s' a ete modifie. Nouvelle valeur = %s.\n",tabArg[2],tabArg[3]);			
 	}
 	else {
-		printf("\n\tArguments non valides. Veuillez saisir a nouveau la commande\n");
+		printf("\n\tArguments de '%s' non valides. Veuillez saisir a nouveau la commande\n",tabArg[1]);
 	}
 
 	}
@@ -124,7 +124,7 @@ else if (strcmp(tabArg[1],"show")==0) {
 		showSettings(p_settings);
 	}
 	else {
-		printf("\n\tArguments non valides. Veuillez saisir a nouveau la commande\n");
+		printf("\n\tArguments de '%s' non valides. Veuillez saisir a nouveau la commande\n",tabArg[1]);
 	}
 
 	}		
